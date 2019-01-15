@@ -1,0 +1,31 @@
+{
+  "name": "pokemontcg-deckbuilder",
+  "version": "1.0.0",
+  "description": "Using node.js, react.js, Postgres and bootstrap",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seany94/Pokemontcg-deckbuilder.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/seany94/Pokemontcg-deckbuilder/issues"
+  },
+  "homepage": "https://github.com/seany94/Pokemontcg-deckbuilder#readme",
+  "dependencies": {
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.4",
+    "express-react-views": "^0.11.0",
+    "js-sha256": "^0.9.0",
+    "method-override": "^3.0.0",
+    "pg": "^7.8.0",
+    "pokemontcgsdk": "^1.1.0",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
+    "sha256": "^0.2.0"
+  }
+}

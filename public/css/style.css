@@ -1,0 +1,9 @@
+body{
+	background-image: url("https://i1.wp.com/images3.alphacoders.com/764/thumb-1920-764967.png");
+	background-size: cover;
+	background-repeat: no-repeat;
+	min-height: 900px;
+	color: white;
+	text-shadow: 2px 1px black;
+	font-size: 20px;
+}
