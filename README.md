@@ -1,5 +1,5 @@
 # Pokemontcg-deckbuilder
-Using node.js, react.js, Postgres and bootstrap
+Using node.js, react.js, express, postgres and bootstrap
 
 Requirements:-
 1. Display database of Pokemon cards. All users can view them
