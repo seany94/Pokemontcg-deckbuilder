@@ -1,5 +1,4 @@
 module.exports = (db) => {
-
   /**
    * ===========================================
    * Controller logic
@@ -7,10 +6,7 @@ module.exports = (db) => {
    */
 
   let index = (request, response) => {
-    var name = request.params.name;
-      db.pokemon.getAll(name,(error, allPokemon) => {
-        response.render('home', { allPokemon });
-      });
+        response.render('home');
   };
 
 

@@ -8,6 +8,5 @@ module.exports = (app, db) => {
    *  =========================================
    */
 
-  //app.get('/pokemons', pokemons.index);
-  app.get('/', pokemons.index);
+  // app.get('/', pokemons.index);
 };

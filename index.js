@@ -2,28 +2,8 @@ const express = require('express');
 const methodOverride = require('method-override');
 const cookieParser = require('cookie-parser');
 const sha256 = require('js-sha256');
-const pg = require('pg');
 const pokemon = require('pokemontcgsdk');
 const db = require('./db');
-
-/**
- * ===================================
- * Configurations and set up
- * ===================================
- */
-
-const configs = {
-  user: 'sean',
-  host: '127.0.0.1',
-  database: 'pokemon',
-  port: 5432,
-};
-
-const pool = new pg.Pool(configs);
-
-pool.on('error', function (err) {
-  console.log('idle client error', err.message, err.stack);
-});
 
 // Init express app
 const app = express();
@@ -47,15 +27,15 @@ app.engine('jsx', reactEngine);
 // Import routes to match incoming requests
 require('./routes')(app, db);
 
-// Root GET request (it doesn't belong in any controller file)
+// // Root GET request (it doesn't belong in any controller file)
 app.get('/', (request, response) => {
-  response.render('home');
+    response.render('home');
 });
 
-// Catch all unmatched requests and return 404 not found page
-app.get('*', (request, response) => {
-  response.render('notfound');
-});
+// // Catch all unmatched requests and return 404 not found page
+// app.get('*', (request, response) => {
+//   response.render('notfound');
+// });
 
 /**
  * ===================================
@@ -69,7 +49,7 @@ let onClose = function(){
 
   server.close(() => {
     console.log('Process terminated')
-    pool.end( () => console.log('Shut down db connection pool'));
+    db.pool.end( () => console.log('Shut down db connection pool'));
   })
 };
 

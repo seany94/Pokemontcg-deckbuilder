@@ -1,9 +1,38 @@
 body{
-	background-image: url("https://i1.wp.com/images3.alphacoders.com/764/thumb-1920-764967.png");
+	background-image: url("https://stmed.net/sites/default/files/pokemon-go-hd-wallpapers-33512-9070371.png");
 	background-size: cover;
 	background-repeat: no-repeat;
 	min-height: 900px;
 	color: white;
 	text-shadow: 2px 1px black;
 	font-size: 20px;
+}
+
+.gallery{
+	display: inline;
+}
+
+#pokecard, #traincard, #energycard{
+	display: inline-block;
+	margin: 70px;
+}
+
+img{
+	max-width: 128px;
+	margin: 5px;
+}
+
+footer{
+	overflow: hidden;
+	border-top: 2px solid #333;
+	padding: 10px 0;
+	text-align: center;
+	position: relative;
+	margin-top: 10px;
+  width: 100%;
+  color: white;
+  font-size: 10px;
+  letter-spacing: 2px;
+  font-weight: 500;
+  text-transform: uppercase;
 }
