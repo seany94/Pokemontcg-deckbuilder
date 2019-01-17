@@ -54,7 +54,7 @@ class Signin extends React.Component {
   else if(this.props.list[0] === 'disabled'){
     return (
       <Defaultcss>
-      <div className="alert alert-danger alert-dismissible fade show text-white" role="alert">
+      <div className="alert alert-danger alert-dismissible fade show " role="alert">
               <strong>Please Read!</strong><br /> System has checked you have already signed in.
               <button type="button" className="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>

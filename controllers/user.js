@@ -43,7 +43,25 @@ module.exports = (db) => {
         response.redirect('/');
     };
 
+    let profile = (request, response) => {
+        let cookie = request.cookies.loggedin
+        db.pokemons.profile(request, response, cookie, (error, result, user) => {
+            response.render('profile', {profile:user, decks:result});
+      });
+    };
 
+    let users = (request, response) => {
+        db.pokemons.list(request, response, (error, result) => {
+            response.render('users', {result});
+      });
+    };
+
+    let userProfile = (request, response) => {
+        let id = request.params.id;
+        db.pokemons.users(request, response, id, (error, result, user) => {
+            response.render('profile', {profile:user, decks:result});
+      });
+    };
   /**
    * ===========================================
    * Export controller functions as a module
@@ -56,6 +74,9 @@ module.exports = (db) => {
     signCheck,
     signIn,
     signOut,
+    profile,
+    users,
+    userProfile,
   };
 
 }

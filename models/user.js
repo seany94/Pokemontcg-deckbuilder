@@ -113,9 +113,71 @@ module.exports = (dbPoolInstance) => {
     })
   };
 
+  let profile = (request, response, cookie, callback) => {
+    if(request.cookies.loggedin !== undefined){
+        dbPoolInstance.query(`SELECT * FROM users WHERE password = '${request.cookies.loggedin}'`, (error, queryResult) =>{
+            let user = queryResult.rows;
+            dbPoolInstance.query(`SELECT decks.name FROM decks INNER JOIN users ON (users.id = author_id AND users.password = '${request.cookies.loggedin}')`, (error, queryResult) =>{
+                if( error ){
+
+                    // invoke callback function with results after query has executed
+                    callback(error, null, null);
+
+                  }
+                  else{
+
+                    // invoke callback function with results after query has executed
+                    callback(null, queryResult.rows, user);
+                  }
+            })
+        })
+    }
+    else{
+        response.render('profile');
+    }
+  };
+
+  let list = (request, response, callback) => {
+    dbPoolInstance.query("SELECT * FROM users ORDER BY name ASC", (error, queryResult) =>{
+        if( error ){
+
+        // invoke callback function with results after query has executed
+            callback(error, null, null);
+
+        }
+        else{
+
+        // invoke callback function with results after query has executed
+            callback(null, queryResult.rows);
+        }
+    })
+  };
+
+  let users = (request, response, id, callback) => {
+    dbPoolInstance.query(`SELECT * FROM users WHERE id = '${id}'`, (error, queryResult) =>{
+            let user = queryResult.rows;
+            dbPoolInstance.query(`SELECT decks.name FROM decks INNER JOIN users ON (users.id = author_id AND users.id = '${id}')`, (error, queryResult) =>{
+                if( error ){
+
+                    // invoke callback function with results after query has executed
+                    callback(error, null, null);
+
+                  }
+                  else{
+
+                    // invoke callback function with results after query has executed
+                    callback(null, queryResult.rows, user);
+                  }
+            })
+        })
+  };
+
   return {
     home,
     signUp,
     signInto,
+    profile,
+    list,
+    users
   };
 };

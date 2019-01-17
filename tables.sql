@@ -9,7 +9,15 @@ CREATE TABLE IF NOT EXISTS users (
 
 CREATE TABLE IF NOT EXISTS decks (
     id SERIAL PRIMARY KEY,
-    cards TEXT,
+    name TEXT,
     author_id INT,
     FOREIGN KEY (author_id) REFERENCES users(id)
+);
+
+CREATE TABLE IF NOT EXISTS cards (
+    id SERIAL PRIMARY KEY,
+    pokemon_url TEXT,
+    card_id TEXT,
+    deck_id INT,
+    FOREIGN KEY (deck_id) REFERENCES decks(id)
 );

@@ -15,4 +15,8 @@ module.exports = (app, db) => {
   app.get('/user/signin', pokemons.signCheck);
   app.post('/user/signin', pokemons.signIn);
   app.get('/user/signout', pokemons.signOut);
+  app.get('/profile', pokemons.profile);
+  app.get('/users', pokemons.users);
+  app.get('/users/:id', pokemons.userProfile);
+
 };
