@@ -62,6 +62,13 @@ module.exports = (db) => {
             response.render('profile', {profile:user, decks:result});
       });
     };
+
+    let deck = (request, response) => {
+        let cookie = request.cookies.loggedin;
+        db.pokemons.cards(request, response, cookie, (error, result, user) => {
+            response.render('deck', {user});
+      });
+    };
   /**
    * ===========================================
    * Export controller functions as a module
@@ -77,6 +84,7 @@ module.exports = (db) => {
     profile,
     users,
     userProfile,
+    deck
   };
 
 }

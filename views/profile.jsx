@@ -30,7 +30,12 @@ class Profile extends React.Component {
     if(this.props.profile == undefined){
         return (
         <Defaultcss>
-            <h1>Please go and sign in before entering this page.</h1>
+        <div className="alert alert-danger alert-dismissible fade show" role="alert">
+          <strong>Please Read!</strong><br /> Please go back and sign in before entering this page.
+          <button type="button" className="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
             <form method="GET" action="/">
                 <input type="submit" className="new" value="Back" />
             </form>

@@ -38,6 +38,7 @@ input{
 	overflow-y: scroll;
   position: relative;
   height: 400px;
+  border: 1px dashed teal;
 }
 
 #pokecard, #traincard, #energycard{

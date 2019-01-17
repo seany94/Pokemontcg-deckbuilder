@@ -172,12 +172,37 @@ module.exports = (dbPoolInstance) => {
         })
   };
 
+  let cards = (request, response, cookie, callback) => {
+    if(request.cookies.loggedin !== undefined){
+        dbPoolInstance.query(`SELECT name FROM users WHERE password = '${request.cookies.loggedin}'`, (error, queryResult) =>{
+                if( error ){
+
+                    // invoke callback function with results after query has executed
+                    callback(error, null, null);
+
+                  }
+                  else{
+                    const user = queryResult.rows[0];
+
+                    user: [user.name]
+
+                    // invoke callback function with results after query has executed
+                    callback(null, queryResult.rows, user);
+                  }
+        })
+    }
+    else{
+        response.render('deck');
+    }
+  };
+
   return {
     home,
     signUp,
     signInto,
     profile,
     list,
-    users
+    users,
+    cards
   };
 };
