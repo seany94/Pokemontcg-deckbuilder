@@ -1,27 +1,30 @@
 window.onload = function(){
-    var pokeButton = document.querySelector('#pokecard')
 
-    pokeButton.addEventListener('click', function(){
-        var input = 'supertype=pokemon'
-        var type = 'poke';
-        ajax(input, type);
-    });
+    if(document.querySelector('#pokecard') != null && document.querySelector('#traincard') != null && document.querySelector('#energycard') != null){
+        var pokeButton = document.querySelector('#pokecard')
 
-    var trainButton = document.querySelector('#traincard')
+        pokeButton.addEventListener('click', function(){
+            var input = 'supertype=pokemon'
+            var type = 'poke';
+            ajax(input, type);
+        });
 
-    trainButton.addEventListener('click', function(){
-        var input = 'supertype=trainer'
-        var type = 'train'
-        ajax(input, type);
-    });
+        var trainButton = document.querySelector('#traincard')
 
-    var energyButton = document.querySelector('#energycard')
+        trainButton.addEventListener('click', function(){
+            var input = 'supertype=trainer'
+            var type = 'train'
+            ajax(input, type);
+        });
 
-    energyButton.addEventListener('click', function(){
-        var input = 'supertype=energy'
-        var type = 'energy'
-        ajax(input, type);
-    });
+        var energyButton = document.querySelector('#energycard')
+
+        energyButton.addEventListener('click', function(){
+            var input = 'supertype=energy'
+            var type = 'energy'
+            ajax(input, type);
+        });
+    }
 };
 
 var ajax = function(input, type){
@@ -85,24 +88,29 @@ var ajax = function(input, type){
                     modalBtn.appendChild(modalSpan);
 
                     if(type === 'poke'){
-                        let attackCost = [];
                         let attack = [];
                         let weaknesses = [];
                         let resistances = [];
+                        let retreat = [];
 
                         for(let j = 0; j < jsonData.cards[i].attacks.length; j++){
-                            attackCost.push(jsonData.cards[i].attacks[j].cost);
-                            attack.push(jsonData.cards[i].attacks[j].name);
+                            attack.push(jsonData.cards[i].attacks[j].cost);
+                            attack.push(jsonData.cards[i].attacks[j].name, "---");
                         }
 
                         if(jsonData.cards[i].hasOwnProperty('weaknesses')){
                             for(let a = 0; a < jsonData.cards[i].weaknesses.length; a++){
-                            weaknesses.push(jsonData.cards[i].weaknesses[a].type);
+                                weaknesses.push(jsonData.cards[i].weaknesses[a].type);
                             }
                         }
-                        else if(jsonData.cards[i].hasOwnProperty('resistances')){
+                        if(jsonData.cards[i].hasOwnProperty('resistances')){
                             for(let b = 0; b < jsonData.cards[i].resistances.length; b++){
-                            resistances.push(jsonData.cards[i].resistances[b].type);
+                                resistances.push(jsonData.cards[i].resistances[b].type);
+                            }
+                        }
+                        if(jsonData.cards[i].hasOwnProperty('retreatCost')){
+                            for(let c = 0; c < jsonData.cards[i].retreatCost.length; c++){
+                                retreat.push(jsonData.cards[i].retreatCost[c]);
                             }
                         }
 
@@ -110,14 +118,14 @@ var ajax = function(input, type){
                             let modalBody = document.createElement("div");
                             modalBody.setAttribute("class", "modal-body text-danger");
                             modalBody.setAttribute("id", "content");
-                            modalBody.innerHTML = `<img src='${jsonData.cards[i].imageUrlHiRes}'> <span class="text-info">Name:</span> ${jsonData.cards[i].name} <br> <span class="text-info">Type:</span> ${jsonData.cards[i].types} <br> <span class="text-info">Stage:</span> ${jsonData.cards[i].subtype} <br> <span class="text-info">Hp:</span> ${jsonData.cards[i].hp} <br> <span class="text-info">Poke-Body:</span> ${jsonData.cards[i].ability.name}. <br> ${jsonData.cards[i].ability.text} <br> <span class="text-info">Attacks:</span> ${attackCost} ${attack} <br> <span class="text-info">Weaknesses:</span> ${weaknesses} <br> <span class="text-info">Resistances:</span> ${resistances} <br> <span class="text-info">Series:</span> ${jsonData.cards[i].series} <br> <span class="text-info">Set:</span> ${jsonData.cards[i].set}`
+                            modalBody.innerHTML = `<img src='${jsonData.cards[i].imageUrlHiRes}'> <span class="text-info">Name:</span> ${jsonData.cards[i].name} <br> <span class="text-info">Type:</span> ${jsonData.cards[i].types} <br> <span class="text-info">Stage:</span> ${jsonData.cards[i].subtype} <br> <span class="text-info">Hp:</span> ${jsonData.cards[i].hp} <br> <span class="text-info">Poke-Body:</span> ${jsonData.cards[i].ability.name}. <br> ${jsonData.cards[i].ability.text} <br> <span class="text-info">Attacks:</span> ---, ${attack} <br> <span class="text-info">Weaknesses:</span> ${weaknesses} <br> <span class="text-info">Resistances:</span> ${resistances} <br> <span class="text-info">Retreat Cost:</span> ${retreat} <br> <span class="text-info">Series:</span> ${jsonData.cards[i].series} <br> <span class="text-info">Set:</span> ${jsonData.cards[i].set}`
                             modalCon.appendChild(modalBody);
                         }
                         else{
                             let modalBody = document.createElement("div");
                             modalBody.setAttribute("class", "modal-body text-danger");
                             modalBody.setAttribute("id", "content");
-                            modalBody.innerHTML = `<img src='${jsonData.cards[i].imageUrlHiRes}'> <span class="text-info">Name:</span> ${jsonData.cards[i].name} <br> <span class="text-info">Type:</span> ${jsonData.cards[i].types} <br> <span class="text-info">Stage:</span> ${jsonData.cards[i].subtype} <br> <span class="text-info">Hp:</span> ${jsonData.cards[i].hp} <br> <span class="text-info">Attacks:</span> ${attackCost} ${attack}<br> <span class="text-info">Weaknesses:</span> ${weaknesses} <br> <span class="text-info">Resistances:</span> ${resistances} <br> <span class="text-info">Series:</span> ${jsonData.cards[i].series} <br> <span class="text-info">Set:</span> ${jsonData.cards[i].set}`
+                            modalBody.innerHTML = `<img src='${jsonData.cards[i].imageUrlHiRes}'> <span class="text-info">Name:</span> ${jsonData.cards[i].name} <br> <span class="text-info">Type:</span> ${jsonData.cards[i].types} <br> <span class="text-info">Stage:</span> ${jsonData.cards[i].subtype} <br> <span class="text-info">Hp:</span> ${jsonData.cards[i].hp} <br> <span class="text-info">Attacks:</span> ---, ${attack}<br> <span class="text-info">Weaknesses:</span> ${weaknesses} <br> <span class="text-info">Resistances:</span> ${resistances} <br> <span class="text-info">Retreat Cost:</span> ${retreat} <br> <span class="text-info">Series:</span> ${jsonData.cards[i].series} <br> <span class="text-info">Set:</span> ${jsonData.cards[i].set}`
                             modalCon.appendChild(modalBody);
                         }
                     }

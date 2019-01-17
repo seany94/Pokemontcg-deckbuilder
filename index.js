@@ -1,7 +1,6 @@
 const express = require('express');
 const methodOverride = require('method-override');
 const cookieParser = require('cookie-parser');
-const sha256 = require('js-sha256');
 const pokemon = require('pokemontcgsdk');
 const db = require('./db');
 
@@ -27,15 +26,14 @@ app.engine('jsx', reactEngine);
 // Import routes to match incoming requests
 require('./routes')(app, db);
 
-// // Root GET request (it doesn't belong in any controller file)
+// Root GET request (it doesn't belong in any controller file)
 app.get('/', (request, response) => {
     response.render('home');
 });
 
-// // Catch all unmatched requests and return 404 not found page
-// app.get('*', (request, response) => {
-//   response.render('notfound');
-// });
+app.get('/user/new', (request, response) => {
+    response.render('newuser');
+});
 
 /**
  * ===================================

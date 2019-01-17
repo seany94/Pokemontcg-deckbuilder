@@ -8,7 +8,7 @@ class Defaultcss extends React.Component {
         <head>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossOrigin="anonymous" />
         <link rel="stylesheet" type="text/css" href="/css/style.css" />
-        <link href="https://fonts.googleapis.com/css?family=ZCOOL+KuaiLe" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Bitter" rel="stylesheet" />
         <title>Pokemon Trading Card Game Deck-Builder</title>
         </head>
         <header>
@@ -30,7 +30,7 @@ class Defaultcss extends React.Component {
                 <a className="nav-link text-info" href="/user/signin">Sign In</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link text-info" href="/users/new">Sign Up</a>
+                <a className="nav-link text-info" href="/user/new">Sign Up</a>
               </li>
               <li className="nav-item">
                 <a className="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Contact</a>

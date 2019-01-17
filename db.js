@@ -1,5 +1,5 @@
 const pg = require('pg');
-const pokemons = require('./models/pokemon');
+const pokemons = require('./models/user');
 const url = require('url');
 
 /**

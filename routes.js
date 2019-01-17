@@ -1,6 +1,6 @@
 module.exports = (app, db) => {
 
-  const pokemons = require('./controllers/pokemon')(db);
+  const pokemons = require('./controllers/user')(db);
 
   /*
    *  =========================================
@@ -8,5 +8,8 @@ module.exports = (app, db) => {
    *  =========================================
    */
 
-  // app.get('/', pokemons.index);
+  app.post('/user/add', pokemons.add);
+  app.get('/user/signin', pokemons.signCheck);
+  app.post('/user/signin', pokemons.signIn);
+
 };
