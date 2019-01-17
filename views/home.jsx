@@ -3,18 +3,16 @@ var Defaultcss = require('./defaultcss');
 
 class Home extends React.Component {
   render() {
-    console.log(this.props.success)
-    if(this.props.success !== undefined){
+    if(this.props.user !== undefined){
         return (
             <Defaultcss>
-                <h2>Welcome To PokemonTCG Deck-Builder {this.props.success.name}. Enjoy your registered user privileges
-                </h2>
-                <h2>Enjoy your registered user privileges</h2>
+                <h3>Welcome To PokemonTCG Deck-Builder {this.props.user.name}. </h3>
                 <form method="GET" action={"/users/tweet/new"}>
                     <input type="submit" className="tweet" value="Create Deck"/>
                 </form>
+                <br/>
                 <div className="alert alert-danger alert-dismissible fade show" role="alert">
-                  <strong>Please Read!</strong><br /> Use navbar to navigate to users which are your follows and followers, to sign up and to login. You can check out your profile with your details. In order to see tweets in the home page please login. Check for cookie in chrome console to see if you are logged in or the welcome line above as you will see who you are logged in as. Thanks!
+                  <strong>Please Read!</strong><br /> You have successfully signed in on our website and have gain full access to registered user only privileges. The privileges are create deck, personilized profile of your own for you and other users to see and ability to rate other users' deck. That is all so enjoy your stay!
                   <button type="button" className="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
@@ -34,14 +32,14 @@ class Home extends React.Component {
         );
     }
     else{
-            return (
+        return (
             <Defaultcss>
-                <h2>Welcome To PokemonTCG Deck-Builder.</h2>
+                <h3>Welcome To PokemonTCG Deck-Builder Guest. </h3>
                 <form method="GET" action={"/users/tweet/new"}>
                     <input type="submit" className="tweet" value="Create Deck"/>
                 </form>
                 <div className="alert alert-danger alert-dismissible fade show" role="alert">
-                  <strong>Please Read!</strong><br /> Use navbar to navigate to users which are your follows and followers, to sign up and to login. You can check out your profile with your details. In order to see tweets in the home page please login. Check for cookie in chrome console to see if you are logged in or the welcome line above as you will see who you are logged in as. Thanks!
+                  <strong>Please Read!</strong><br /> Remember to sign up if you still have not done so. It is the only way to gain access to all awesome registered user only features. You will never regret it!
                   <button type="button" className="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>

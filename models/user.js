@@ -8,13 +8,38 @@ const sha256 = require('js-sha256');
 module.exports = (dbPoolInstance) => {
   // `dbPoolInstance` is accessible within this function scope
 
+  let home = (request, response, cookie, callback) => {
+    if(request.cookies.loggedin !== undefined){
+        dbPoolInstance.query(`SELECT name FROM users WHERE password = '${request.cookies.loggedin}'`, (error, queryResult) =>{
+                if( error ){
+
+                    // invoke callback function with results after query has executed
+                    callback(error, null, null);
+
+                  }
+                  else{
+                    const user = queryResult.rows[0];
+
+                    user: [user.name]
+
+                    // invoke callback function with results after query has executed
+                    callback(null, queryResult.rows, user);
+                  }
+        })
+    }
+    else{
+        response.render('home');
+    }
+  };
+
   let signUp = (request, response, callback) => {
-    dbPoolInstance.query("SELECT name FROM users", (error, queryResult) => {
+    dbPoolInstance.query("SELECT name, username FROM users", (error, queryResult) => {
         let validate = true;
         let queryName = queryResult.rows;
         let paramName = request.body.name.charAt(0).toUpperCase() + request.body.name.slice(1);
+        let paramUserName = request.body.username;
         for(let i = 0; i < queryName.length; i++){
-            if(paramName == queryName[i].name){
+            if(paramName == queryName[i].name || paramUserName == queryName[i].username){
                 validate = false;
             }
         }
@@ -36,7 +61,8 @@ module.exports = (dbPoolInstance) => {
                 // invoke callback function with results after query has executed
                 callback(error, null, null);
 
-              }else{
+              }
+              else{
 
                 // invoke callback function with results after query has executed
                 callback(null, queryResult.rows, values);
@@ -63,8 +89,7 @@ module.exports = (dbPoolInstance) => {
             let inputPass = sha256(request.body.password)
 
             if(password == inputPass){
-                let hashCookie = sha256(user.name);
-                response.cookie('loggedin', hashCookie);
+                response.cookie('loggedin', inputPass);
 
                 dbPoolInstance.query(`SELECT id FROM users WHERE name = '${user.name}'`, (error, queryResult) =>{
                     if( error ){
@@ -89,6 +114,7 @@ module.exports = (dbPoolInstance) => {
   };
 
   return {
+    home,
     signUp,
     signInto,
   };

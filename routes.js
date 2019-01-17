@@ -8,8 +8,11 @@ module.exports = (app, db) => {
    *  =========================================
    */
 
-  app.post('/user/add', pokemons.add);
+  app.get('/', pokemons.index);
+  app.get('/user/new', pokemons.newUser);
+  app.get('/user/new', pokemons.newUser);
+  app.post('/user/add', pokemons.addUser);
   app.get('/user/signin', pokemons.signCheck);
   app.post('/user/signin', pokemons.signIn);
-
+  app.get('/user/signout', pokemons.signOut);
 };

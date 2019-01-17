@@ -172,8 +172,6 @@ var ajax = function(input, type){
                 if(document.querySelector(".modal") !== null){
                     document.body.removeChild(document.querySelector(".modal"));
                 }
-
-                // console.log(jsonData.cards[i]);
                 }
             };
 

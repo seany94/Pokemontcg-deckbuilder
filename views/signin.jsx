@@ -27,7 +27,7 @@ class Signin extends React.Component {
     else if(this.props.list[0] === 'error'){
     return (
       <Defaultcss>
-      <div className="alert alert-danger alert-dismissible fade show" role="alert">
+        <div className="alert alert-danger alert-dismissible fade show" role="alert">
               <strong>Please Read!</strong><br /> Error unable to login. Please double check again your username and password that you have input to see whether they are correct.
               <button type="button" className="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
