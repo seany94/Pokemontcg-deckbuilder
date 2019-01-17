@@ -4,13 +4,19 @@ body{
 	background-repeat: no-repeat;
 	min-height: 900px;
 	color: white;
-	text-shadow: 1px 1px black;
+	/*text-shadow: 0 1px black;*/
 	font-size: 20px;
 }
 
 .gallery{
 	display: inline;
 	text-align: center;
+}
+
+#pokemons{
+	overflow-y: scroll;
+  position: relative;
+  height: 400px;
 }
 
 #pokecard, #traincard, #energycard{
@@ -28,15 +34,25 @@ body{
 	margin: 5px;
 }
 
+#exampleModalLabel{
+	font-size: 25px;
+}
+
 #content {
 	display: block;
 	float: right;
 	text-shadow: none;
 }
 
+#content span{
+	font-size: 23px;
+	text-shadow: 0 1px black;
+}
+
 #content img{
 	float: left;
-	max-width: 250px;
+	padding: 0 20px 0 10px;
+	max-width: 370px;
 }
 
 footer{
@@ -57,5 +73,8 @@ footer{
 @media only screen and (max-width: 1000px) {
 	#pokecard, #traincard, #energycard{
 		left: 25%;
+	}
+	#content img{
+		max-width: 230px;
 	}
 }
