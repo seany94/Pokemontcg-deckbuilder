@@ -20,6 +20,14 @@ input{
 	display: inline-block;
 }
 
+#save{
+	display: flex;
+  align-items: center;
+  justify-content: center;
+	margin: 0 auto;
+	padding: 0 90px;
+}
+
 .alert{
 	color: rgb(44, 146, 155);
 	text-shadow: none;
@@ -31,14 +39,14 @@ input{
 
 .gallery{
 	display: inline;
-	text-align: center;
 }
 
-#pokemons{
+#pokemons, #deck{
 	overflow-y: scroll;
   position: relative;
   height: 400px;
   border: 1px dashed teal;
+  text-align: center;
 }
 
 #pokecard, #traincard, #energycard{
@@ -48,10 +56,10 @@ input{
 	width: 100px;
 	margin: 0 20px;
 	top: 25%;
-	left: 30%;
+	left: 33%;
 }
 
-#pokeimg{
+.pokesmimg{
 	max-width: 128px;
 	margin: 5px;
 }

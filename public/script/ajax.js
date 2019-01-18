@@ -159,13 +159,37 @@ var ajax = function(input, type){
                     let modalBtnView = document.createElement("button");
                     modalBtnView.setAttribute("type", "submit");
                     modalBtnView.setAttribute("class", "btn btn-primary");
-                    modalBtnView.innerHTML = 'View Profile';
+                    modalBtnView.setAttribute("id", "add" + i);
+                    modalBtnView.innerHTML = 'Add';
                     modalFoot.appendChild(modalBtnView);
+
+                    // Add pokemon to deck container
+                    if(document.querySelector('#deck') != null){
+                        var addButton = document.querySelector('#add' + i)
+
+                        addButton.addEventListener('click', function(){
+                            let pokeAdd = document.createElement("img");
+                            pokeAdd.setAttribute("class", "pokesmimg");
+                            pokeAdd.setAttribute("id", "pokeimgadd" + i);
+                            pokeAdd.setAttribute("src", `${jsonData.cards[i].imageUrl}`);
+                            document.querySelector('#cards').appendChild(pokeAdd);
+
+                            // Delete pokemon from deck container
+                            if(document.querySelector('#cards').hasChildNodes()){
+                                var delButton = document.querySelector('#pokeimgadd' + i)
+
+                                delButton.addEventListener('click', function(){
+                                    document.querySelector('#cards').removeChild(document.querySelector('#pokeimgadd' + i))
+                                });
+                            }
+                        });
+                    }
                 });
                 pokemons.appendChild(pokeLarge);
 
                 let poke = document.createElement("img");
-                poke.setAttribute("id", "pokeimg");
+                poke.setAttribute("class", "pokesmimg");
+                poke.setAttribute("id", "pokeimg" + i);
                 poke.setAttribute("src", `${jsonData.cards[i].imageUrl}`);
                 pokeLarge.appendChild(poke);
 
@@ -173,7 +197,9 @@ var ajax = function(input, type){
                     document.body.removeChild(document.querySelector(".modal"));
                 }
                 }
+
             };
+
 
             // make a new request
             var request = new XMLHttpRequest();

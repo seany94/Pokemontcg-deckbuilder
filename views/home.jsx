@@ -8,7 +8,7 @@ class Home extends React.Component {
             <Defaultcss>
                 <h3>Welcome To PokemonTCG Deck-Builder {this.props.user.name}. </h3>
                 <form method="GET" action="/user/deck">
-                    <input type="submit" className="tweet" value="Create Deck"/>
+                    <input type="submit" value="Create Deck"/>
                 </form>
                 <br/>
                 <div className="alert alert-danger alert-dismissible fade show" role="alert">
@@ -35,7 +35,7 @@ class Home extends React.Component {
         return (
             <Defaultcss>
                 <h3>Welcome To PokemonTCG Deck-Builder Guest. </h3>
-                <form method="GET" action={"/users/tweet/new"}>
+                <form method="GET" action="/user/deck">
                     <input type="submit" className="tweet" value="Create Deck"/>
                 </form>
                 <div className="alert alert-danger alert-dismissible fade show" role="alert">

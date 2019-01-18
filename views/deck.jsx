@@ -25,6 +25,13 @@ class Deck extends React.Component {
                         Energy
                     </div>
                 </div>
+                <div id="deck">
+                    <form method="POST" action="/user/deck">
+                        <input type="submit" id="save" value="Save Deck"/>
+                        <div id="cards">
+                        </div>
+                    </form>
+                </div>
             </Defaultcss>
         );
     }
