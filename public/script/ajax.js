@@ -32,6 +32,12 @@ var ajax = function(input, type){
     var ajaxUrl = `https://api.pokemontcg.io/v1/cards?${input}&pageSize=700`;
 
     if(document.querySelector("section") == null){
+        // let pokeSearch = document.createElement('input');
+        // pokeSearch.setAttribute('class', 'form-control');
+        // pokeSearch.setAttribute('onkeyup', 'search()');
+        // pokeSearch.setAttribute('placeholder', 'Search');
+        // document.querySelector('.gallery').appendChild(pokeSearch)
+
         var pokemons = document.createElement("section");
         pokemons.setAttribute("id", "pokemons");
         document.querySelector('.gallery').appendChild(pokemons);
@@ -93,9 +99,11 @@ var ajax = function(input, type){
                         let resistances = [];
                         let retreat = [];
 
-                        for(let j = 0; j < jsonData.cards[i].attacks.length; j++){
-                            attack.push(jsonData.cards[i].attacks[j].cost);
-                            attack.push(jsonData.cards[i].attacks[j].name, "---");
+                        if(jsonData.cards[i].hasOwnProperty('attacks')){
+                            for(let j = 0; j < jsonData.cards[i].attacks.length; j++){
+                                attack.push(jsonData.cards[i].attacks[j].cost);
+                                attack.push(jsonData.cards[i].attacks[j].name, "---");
+                            }
                         }
 
                         if(jsonData.cards[i].hasOwnProperty('weaknesses')){
@@ -173,6 +181,19 @@ var ajax = function(input, type){
                             pokeAdd.setAttribute("id", "pokeimgadd" + i);
                             pokeAdd.setAttribute("src", `${jsonData.cards[i].imageUrl}`);
                             document.querySelector('#cards').appendChild(pokeAdd);
+
+                            let pokeInput = document.createElement("input");
+                            pokeInput.setAttribute("type", "hidden");
+                            pokeInput.setAttribute("id", "pokeinput" + i);
+                            pokeInput.setAttribute("name", "img");
+                            pokeInput.setAttribute("value", `${jsonData.cards[i].imageUrl}`);
+                            document.querySelector('#cards').appendChild(pokeInput);
+                            let pokeInput2 = document.createElement("input");
+                            pokeInput2.setAttribute("type", "hidden");
+                            pokeInput2.setAttribute("id", "pokeinput" + i);
+                            pokeInput2.setAttribute("name", "card");
+                            pokeInput2.setAttribute("value", `${jsonData.cards[i].id}`);
+                            document.querySelector('#cards').appendChild(pokeInput2);
 
                             // Delete pokemon from deck container
                             if(document.querySelector('#cards').hasChildNodes()){

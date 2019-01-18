@@ -26,7 +26,7 @@ class Deck extends React.Component {
                     </div>
                 </div>
                 <div id="deck">
-                    <form method="POST" action="/user/deck">
+                    <form method="POST" action="/user/decks">
                         <input type="submit" id="save" value="Save Deck"/>
                         <div id="cards">
                         </div>

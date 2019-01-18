@@ -68,6 +68,13 @@ module.exports = (db) => {
         db.pokemons.cards(request, response, cookie, (error, result, user) => {
             response.render('deck', {user});
       });
+    }
+
+    let newDeck = (request, response) => {
+        let cookie = request.cookies.loggedin;
+        db.pokemons.create(request, cookie, (error, result) => {
+      });
+        response.render('newdeck');
     };
   /**
    * ===========================================
@@ -84,7 +91,8 @@ module.exports = (db) => {
     profile,
     users,
     userProfile,
-    deck
+    deck,
+    newDeck
   };
 
 }

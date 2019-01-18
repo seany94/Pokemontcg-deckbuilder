@@ -196,6 +196,38 @@ module.exports = (dbPoolInstance) => {
     }
   };
 
+  let create = (request, cookie, callback) => {
+
+    dbPoolInstance.query(`SELECT id FROM users WHERE password = '${request.cookies.loggedin}'`, (error, queryResult) =>{
+        let id = queryResult.rows[0].id;
+        dbPoolInstance.query(`INSERT INTO decks (name, author_id) VALUES ('new', ${id})`, (error, queryResult) =>{
+            dbPoolInstance.query(`SELECT id FROM decks WHERE name = 'new'`, (error, queryResult) =>{
+                let deckId = queryResult.rows[0].id;
+                let newQuery = '';
+                for(let i = 0; i < request.body.img.length; i++){
+                    let image = request.body.img[i];
+                    let card = request.body.card[i];
+                    newQuery += `INSERT INTO cards (pokemon_url, card_id, deck_id) VALUES ('${image}', '${card}', ${deckId});`
+                }
+                dbPoolInstance.query(newQuery, (error, queryResult) => {
+                    if( error ){
+
+                    // invoke callback function with results after query has executed
+                    return callback(error, null);
+
+                  }
+                  else{
+                    // invoke callback function with results after query has executed
+                    callback(null, queryResult.rows);
+                  }
+                });
+            });
+        });
+    });
+  };
+
+
+
   return {
     home,
     signUp,
@@ -203,6 +235,7 @@ module.exports = (dbPoolInstance) => {
     profile,
     list,
     users,
-    cards
+    cards,
+    create
   };
 };
