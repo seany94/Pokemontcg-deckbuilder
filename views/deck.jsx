@@ -15,6 +15,7 @@ class Deck extends React.Component {
                   </button>
                 </div>
                 <div className="gallery">
+                    <h3>Cards</h3>
                     <div id="pokecard">
                         Pokemon
                     </div>
@@ -26,7 +27,8 @@ class Deck extends React.Component {
                     </div>
                 </div>
                 <div id="deck">
-                    <form method="POST" action="/user/decks">
+                    <form method="POST" action="/user/deck">
+                        <input type="text" name="name" className="form-control mx-auto" placeholder="Name of deck" />
                         <input type="submit" id="save" value="Save Deck"/>
                         <div id="cards">
                         </div>

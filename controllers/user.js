@@ -5,6 +5,8 @@ module.exports = (db) => {
    * ===========================================
    */
 
+   let cards = [];
+
     let index = (request, response) => {
         let cookie = request.cookies.loggedin
         db.pokemons.home(request, response, cookie, (error, result, user) => {
@@ -72,9 +74,9 @@ module.exports = (db) => {
 
     let newDeck = (request, response) => {
         let cookie = request.cookies.loggedin;
-        db.pokemons.create(request, cookie, (error, result) => {
+        db.pokemons.create(request, cookie, (error, result, name) => {
+            response.render('newdeck', {cards:result, deck:name});
       });
-        response.render('newdeck');
     };
   /**
    * ===========================================

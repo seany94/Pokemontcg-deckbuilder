@@ -16,7 +16,6 @@ CREATE TABLE IF NOT EXISTS decks (
 
 CREATE TABLE IF NOT EXISTS cards (
     id SERIAL PRIMARY KEY,
-    pokemon_url TEXT,
     card_id TEXT,
     deck_id INT,
     FOREIGN KEY (deck_id) REFERENCES decks(id)

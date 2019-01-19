@@ -39,9 +39,10 @@ input{
 
 .gallery{
 	display: inline;
+  text-align: center;
 }
 
-#pokemons, #deck{
+#pokemons, #deck, #newdeck{
 	overflow-y: scroll;
   position: relative;
   height: 400px;
@@ -56,7 +57,7 @@ input{
 	width: 100px;
 	margin: 0 20px;
 	top: 25%;
-	left: 33%;
+	left: 31%;
 }
 
 .pokesmimg{
@@ -107,7 +108,7 @@ footer{
 
 @media only screen and (max-width: 1000px) {
 	#pokecard, #traincard, #energycard{
-		left: 25%;
+		left: 20%;
 	}
 	#content img{
 		max-width: 230px;

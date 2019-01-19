@@ -200,26 +200,28 @@ module.exports = (dbPoolInstance) => {
 
     dbPoolInstance.query(`SELECT id FROM users WHERE password = '${request.cookies.loggedin}'`, (error, queryResult) =>{
         let id = queryResult.rows[0].id;
-        dbPoolInstance.query(`INSERT INTO decks (name, author_id) VALUES ('new', ${id})`, (error, queryResult) =>{
-            dbPoolInstance.query(`SELECT id FROM decks WHERE name = 'new'`, (error, queryResult) =>{
+        let name = request.body.name;
+        dbPoolInstance.query(`INSERT INTO decks (name, author_id) VALUES ('${name}', ${id})`, (error, queryResult) =>{
+            dbPoolInstance.query(`SELECT id FROM decks WHERE name = '${name}'`, (error, queryResult) =>{
                 let deckId = queryResult.rows[0].id;
                 let newQuery = '';
-                for(let i = 0; i < request.body.img.length; i++){
-                    let image = request.body.img[i];
+                for(let i = 0; i < request.body.card.length; i++){
                     let card = request.body.card[i];
-                    newQuery += `INSERT INTO cards (pokemon_url, card_id, deck_id) VALUES ('${image}', '${card}', ${deckId});`
+                    newQuery += `INSERT INTO cards (card_id, deck_id) VALUES ('${card}', ${deckId});`
                 }
                 dbPoolInstance.query(newQuery, (error, queryResult) => {
-                    if( error ){
+                    dbPoolInstance.query(`SELECT * FROM cards WHERE deck_id = ${deckId};`, (error, queryResult) => {
+                        if( error ){
 
-                    // invoke callback function with results after query has executed
-                    return callback(error, null);
+                        // invoke callback function with results after query has executed
+                        return callback(error, null, null);
 
-                  }
-                  else{
-                    // invoke callback function with results after query has executed
-                    callback(null, queryResult.rows);
-                  }
+                      }
+                      else{
+                        // invoke callback function with results after query has executed
+                        callback(null, queryResult.rows, name);
+                      }
+                    });
                 });
             });
         });
