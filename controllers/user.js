@@ -60,7 +60,7 @@ module.exports = (db) => {
 
     let userProfile = (request, response) => {
         let id = request.params.id;
-        db.pokemons.users(request, response, id, (error, result, user) => {
+        db.pokemons.user(request, response, id, (error, result, user) => {
             response.render('profile', {profile:user, decks:result});
       });
     };
@@ -76,6 +76,12 @@ module.exports = (db) => {
         let cookie = request.cookies.loggedin;
         db.pokemons.create(request, cookie, (error, result, name) => {
             response.render('newdeck', {cards:result, deck:name});
+      });
+    };
+
+    let viewDeck = (request, response) => {
+        db.pokemons.view(request, (error, result, user, name) => {
+            response.render('viewdeck', {cards:result, deck:name, user:user});
       });
     };
   /**
@@ -94,7 +100,8 @@ module.exports = (db) => {
     users,
     userProfile,
     deck,
-    newDeck
+    newDeck,
+    viewDeck
   };
 
 }

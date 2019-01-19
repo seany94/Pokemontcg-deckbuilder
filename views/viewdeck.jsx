@@ -11,17 +11,17 @@ class Cards extends React.Component{
     }
 }
 
-class Newdeck extends React.Component {
+class Viewdeck extends React.Component {
   render() {
     const deck = this.props.cards.map( card => {
             return <Cards list={card}></Cards>;
         });
         return (
             <Defaultcss>
-                <h3>Congratulation your deck have been saved and uploaded to your profile! </h3>
+                <h3>You are looking at {this.props.user.name}'s deck </h3>
                 <br/>
                 <div className="alert alert-danger alert-dismissible fade show" role="alert">
-                    <strong>Please Read!</strong><br /> You have succesfully saved your deck on our database! Your deck is also assigned to your profile page too. Do let the cards render before enlarging them individually to see them.
+                    <strong>Please Read!</strong><br />  Do let the cards render before enlarging them individually to see them.
                     <button type="button" className="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
@@ -34,9 +34,12 @@ class Newdeck extends React.Component {
                 <div id="newdeck">
                     {deck}
                 </div>
+                <form method="GET" action="/">
+                    <input type="submit" className="new" value="Home" />
+                </form>
             </Defaultcss>
         );
       }
 }
 
-module.exports = Newdeck;
+module.exports = Viewdeck;

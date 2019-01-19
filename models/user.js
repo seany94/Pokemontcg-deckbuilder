@@ -153,7 +153,7 @@ module.exports = (dbPoolInstance) => {
     })
   };
 
-  let users = (request, response, id, callback) => {
+  let user = (request, response, id, callback) => {
     dbPoolInstance.query(`SELECT * FROM users WHERE id = '${id}'`, (error, queryResult) =>{
             let user = queryResult.rows;
             dbPoolInstance.query(`SELECT decks.name FROM decks INNER JOIN users ON (users.id = author_id AND users.id = '${id}')`, (error, queryResult) =>{
@@ -228,6 +228,24 @@ module.exports = (dbPoolInstance) => {
     });
   };
 
+  let view = (request, callback) => {
+    let name = request.params.name;
+    dbPoolInstance.query(`SELECT users.name FROM users INNER JOIN decks ON (users.id = author_id) WHERE decks.name = '${name}'`, (error, queryResult) =>{
+        let user = queryResult.rows[0]
+        dbPoolInstance.query(`SELECT card_id FROM cards INNER JOIN decks ON (deck_id = decks.id) WHERE name = '${name}'`, (error, queryResult) =>{
+            if( error ){
+
+            // invoke callback function with results after query has executed
+                callback(error, null, null, null);
+
+            }
+            else{
+            // invoke callback function with results after query has executed
+                callback(null, queryResult.rows, user, name);
+            }
+        })
+    })
+  };
 
 
   return {
@@ -236,8 +254,9 @@ module.exports = (dbPoolInstance) => {
     signInto,
     profile,
     list,
-    users,
+    user,
     cards,
-    create
+    create,
+    view
   };
 };

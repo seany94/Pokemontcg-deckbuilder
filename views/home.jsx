@@ -12,7 +12,7 @@ class Home extends React.Component {
                 </form>
                 <br/>
                 <div className="alert alert-danger alert-dismissible fade show" role="alert">
-                  <strong>Please Read!</strong><br /> You have successfully signed in on our website and have gain full access to registered user only privileges. The privileges are create deck, personilized profile of your own for you and other users to see and ability to rate other users' deck. That is all so enjoy your stay! Click on the 3 different tabs below of cards to see database of cards on our server.
+                  <strong>Please Read!</strong><br /> You have successfully signed in on our website and have gain full access to registered user only privileges. The privileges are create deck, personilized profile of your own for you and other users to see and ability to rate other user's deck. That is all so enjoy your stay! Click on the 3 different tabs below of cards to see database of cards on our server.
                   <button type="button" className="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>

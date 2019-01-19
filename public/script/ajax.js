@@ -26,6 +26,15 @@ window.onload = function(){
         let inputVal = document.querySelectorAll('input')
         for(let i = 0; i < inputVal.length; i++){
             ajaxOutput(inputVal[i].value);
+
+            // Allow enlarge of cards after set time for cards to load
+            if(inputVal.length - 1 === i) {
+                setTimeout(function(){
+                    document.querySelector('#newdeck').style.pointerEvents = "all";
+                    document.querySelector('.spinner-border').style.visibility = "hidden";
+                }, 10000);
+            }
+
         }
     }
 };
@@ -192,7 +201,7 @@ var ajaxOutput = function(input){
 
 var ajax = function(input, type){
 
-    var ajaxUrl = `https://api.pokemontcg.io/v1/cards?${input}&pageSize=700`;
+    var ajaxUrl = `https://api.pokemontcg.io/v1/cards?${input}&pageSize=900`;
 
     if(document.querySelector("section") == null){
         // let pokeSearch = document.createElement('input');

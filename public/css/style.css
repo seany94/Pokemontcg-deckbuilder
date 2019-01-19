@@ -9,6 +9,7 @@ body{
 	font-size: 18px;
 }
 
+
 input{
 	background-color: rgb(150, 55, 60);
 	font-size: 18px;
@@ -42,7 +43,16 @@ input{
   text-align: center;
 }
 
-#pokemons, #deck, #newdeck{
+#newdeck{
+	pointer-events: none;
+	overflow-y: scroll;
+  position: relative;
+  height: 400px;
+  border: 1px dashed teal;
+  text-align: center;
+}
+
+#pokemons, #deck{
 	overflow-y: scroll;
   position: relative;
   height: 400px;
