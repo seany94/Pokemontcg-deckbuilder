@@ -82,6 +82,17 @@ class Profile extends React.Component {
             <h3>This is {this.props.profile[0].name}'s profile</h3>
             {profile}
             <h5>Decks made by this user:-</h5>
+            <form method="GET" id="form" action="/profile">
+                <div class="form-group">
+                    <select name="sortby" class="form-control" id="exampleFormControlSelect1">
+                      <option value="datecr">Date Created Ascending</option>
+                      <option value="dateup">Date Updated Ascending</option>
+                      <option value="nameasc">Name Ascending</option>
+                      <option value="deckid">Deck ID Ascending</option>
+                    </select>
+                    <input type="submit" value="Sort" />
+                </div>
+            </form>
             <ul>{decks}</ul>
             <form method="GET" action="/users">
                 <input type="submit" className="new" value="Back" />

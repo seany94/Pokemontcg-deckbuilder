@@ -37,8 +37,9 @@ class Home extends React.Component {
             <Defaultcss>
                 <h3>Welcome To PokemonTCG Deck-Builder Guest. </h3>
                 <form method="GET" action="/user/deck">
-                    <input type="submit" className="tweet" value="Create Deck"/>
+                    <input type="submit" value="Create Deck"/>
                 </form>
+                <br/>
                 <div className="alert alert-danger alert-dismissible fade show" role="alert">
                   <strong>Please Read!</strong><br /> Remember to sign up if you still have not done so. It is the only way to gain access to all awesome registered user only features. You will never regret it!
                   <button type="button" className="close" data-dismiss="alert" aria-label="Close">

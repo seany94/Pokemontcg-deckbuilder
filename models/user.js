@@ -8,9 +8,9 @@ const sha256 = require('js-sha256');
 module.exports = (dbPoolInstance) => {
   // `dbPoolInstance` is accessible within this function scope
 
-  let home = (request, response, cookie, callback) => {
-    if(request.cookies.loggedin !== undefined){
-        dbPoolInstance.query(`SELECT name FROM users WHERE password = '${request.cookies.loggedin}'`, (error, queryResult) =>{
+  let home = (response, cookie, callback) => {
+    if(cookie !== undefined){
+        dbPoolInstance.query(`SELECT name FROM users WHERE password = '${cookie}'`, (error, queryResult) =>{
                 if( error ){
 
                     // invoke callback function with results after query has executed
@@ -113,23 +113,85 @@ module.exports = (dbPoolInstance) => {
     })
   };
 
-  let profile = (request, response, cookie, callback) => {
-    if(request.cookies.loggedin !== undefined){
-        dbPoolInstance.query(`SELECT * FROM users WHERE password = '${request.cookies.loggedin}'`, (error, queryResult) =>{
+  let profile = (response, cookie, sort, callback) => {
+    if(cookie !== undefined){
+        dbPoolInstance.query(`SELECT * FROM users WHERE password = '${cookie}'`, (error, queryResult) =>{
             let user = queryResult.rows;
-            dbPoolInstance.query(`SELECT decks.name FROM decks INNER JOIN users ON (users.id = author_id AND users.password = '${request.cookies.loggedin}')`, (error, queryResult) =>{
-                if( error ){
+            if(sort === 'datecr'){
+                dbPoolInstance.query(`SELECT decks.name FROM decks INNER JOIN users ON (users.id = author_id AND users.password = '${cookie}') ORDER BY date_created ASC`, (error, queryResult) =>{
+                    if( error ){
 
-                    // invoke callback function with results after query has executed
-                    callback(error, null, null);
+                        // invoke callback function with results after query has executed
+                        callback(error, null, null);
 
-                  }
-                  else{
+                      }
+                      else{
 
-                    // invoke callback function with results after query has executed
-                    callback(null, queryResult.rows, user);
-                  }
-            })
+                        // invoke callback function with results after query has executed
+                        callback(null, queryResult.rows, user);
+                      }
+                })
+            }
+            else if(sort === 'dateup'){
+                dbPoolInstance.query(`SELECT decks.name FROM decks INNER JOIN users ON (users.id = author_id AND users.password = '${cookie}') ORDER BY date_updated ASC`, (error, queryResult) =>{
+                    if( error ){
+
+                        // invoke callback function with results after query has executed
+                        callback(error, null, null);
+
+                      }
+                      else{
+
+                        // invoke callback function with results after query has executed
+                        callback(null, queryResult.rows, user);
+                      }
+                })
+            }
+            else if(sort === 'nameasc'){
+                dbPoolInstance.query(`SELECT decks.name FROM decks INNER JOIN users ON (users.id = author_id AND users.password = '${cookie}') ORDER BY decks.name ASC`, (error, queryResult) =>{
+                    if( error ){
+
+                        // invoke callback function with results after query has executed
+                        callback(error, null, null);
+
+                      }
+                      else{
+
+                        // invoke callback function with results after query has executed
+                        callback(null, queryResult.rows, user);
+                      }
+                })
+            }
+            else if(sort === 'deckid'){
+                dbPoolInstance.query(`SELECT decks.name FROM decks INNER JOIN users ON (users.id = author_id AND users.password = '${cookie}') ORDER BY decks.id ASC`, (error, queryResult) =>{
+                    if( error ){
+
+                        // invoke callback function with results after query has executed
+                        callback(error, null, null);
+
+                      }
+                      else{
+
+                        // invoke callback function with results after query has executed
+                        callback(null, queryResult.rows, user);
+                      }
+                })
+            }
+            else{
+                dbPoolInstance.query(`SELECT decks.name FROM decks INNER JOIN users ON (users.id = author_id AND users.password = '${cookie}')`, (error, queryResult) =>{
+                    if( error ){
+
+                        // invoke callback function with results after query has executed
+                        callback(error, null, null);
+
+                      }
+                      else{
+
+                        // invoke callback function with results after query has executed
+                        callback(null, queryResult.rows, user);
+                      }
+                })
+            }
         })
     }
     else{
@@ -137,7 +199,7 @@ module.exports = (dbPoolInstance) => {
     }
   };
 
-  let list = (request, response, callback) => {
+  let list = (callback) => {
     dbPoolInstance.query("SELECT * FROM users ORDER BY name ASC", (error, queryResult) =>{
         if( error ){
 
@@ -153,7 +215,7 @@ module.exports = (dbPoolInstance) => {
     })
   };
 
-  let user = (request, response, id, callback) => {
+  let user = (id, callback) => {
     dbPoolInstance.query(`SELECT * FROM users WHERE id = '${id}'`, (error, queryResult) =>{
             let user = queryResult.rows;
             dbPoolInstance.query(`SELECT decks.name FROM decks INNER JOIN users ON (users.id = author_id AND users.id = '${id}')`, (error, queryResult) =>{
@@ -172,23 +234,23 @@ module.exports = (dbPoolInstance) => {
         })
   };
 
-  let cards = (request, response, cookie, callback) => {
-    if(request.cookies.loggedin !== undefined){
-        dbPoolInstance.query(`SELECT name FROM users WHERE password = '${request.cookies.loggedin}'`, (error, queryResult) =>{
-                if( error ){
+  let cards = (response, cookie, callback) => {
+    if(cookie !== undefined){
+        dbPoolInstance.query(`SELECT name FROM users WHERE password = '${cookie}'`, (error, queryResult) =>{
+            if( error ){
 
-                    // invoke callback function with results after query has executed
-                    callback(error, null, null);
+                // invoke callback function with results after query has executed
+                callback(error, null, null);
 
-                  }
-                  else{
-                    const user = queryResult.rows[0];
+              }
+              else{
+                const user = queryResult.rows[0];
 
-                    user: [user.name]
+                user: [user.name]
 
-                    // invoke callback function with results after query has executed
-                    callback(null, queryResult.rows, user);
-                  }
+                // invoke callback function with results after query has executed
+                callback(null, queryResult.rows, user);
+              }
         })
     }
     else{
@@ -196,18 +258,16 @@ module.exports = (dbPoolInstance) => {
     }
   };
 
-  let create = (request, cookie, callback) => {
-
-    dbPoolInstance.query(`SELECT id FROM users WHERE password = '${request.cookies.loggedin}'`, (error, queryResult) =>{
+  let create = (cookie, name, card, callback) => {
+    dbPoolInstance.query(`SELECT id FROM users WHERE password = '${cookie}'`, (error, queryResult) =>{
         let id = queryResult.rows[0].id;
-        let name = request.body.name;
         dbPoolInstance.query(`INSERT INTO decks (name, author_id) VALUES ('${name}', ${id})`, (error, queryResult) =>{
             dbPoolInstance.query(`SELECT id FROM decks WHERE name = '${name}'`, (error, queryResult) =>{
                 let deckId = queryResult.rows[0].id;
                 let newQuery = '';
-                for(let i = 0; i < request.body.card.length; i++){
-                    let card = request.body.card[i];
-                    newQuery += `INSERT INTO cards (card_id, deck_id) VALUES ('${card}', ${deckId});`
+                for(let i = 0; i < card.length; i++){
+                    let cards = card[i];
+                    newQuery += `INSERT INTO cards (card_id, deck_id) VALUES ('${cards}', ${deckId});`
                 }
                 dbPoolInstance.query(newQuery, (error, queryResult) => {
                     dbPoolInstance.query(`SELECT * FROM cards WHERE deck_id = ${deckId};`, (error, queryResult) => {
@@ -228,8 +288,7 @@ module.exports = (dbPoolInstance) => {
     });
   };
 
-  let view = (request, callback) => {
-    let name = request.params.name;
+  let view = (name, callback) => {
     dbPoolInstance.query(`SELECT users.name FROM users INNER JOIN decks ON (users.id = author_id) WHERE decks.name = '${name}'`, (error, queryResult) =>{
         let user = queryResult.rows[0]
         dbPoolInstance.query(`SELECT card_id FROM cards INNER JOIN decks ON (deck_id = decks.id) WHERE name = '${name}'`, (error, queryResult) =>{
@@ -247,10 +306,9 @@ module.exports = (dbPoolInstance) => {
     })
   };
 
-  let edit = (request, response, cookie, callback) => {
-    let name = request.params.name;
-    if(request.cookies.loggedin !== undefined){
-        dbPoolInstance.query(`SELECT name, id FROM users WHERE password = '${request.cookies.loggedin}'`, (error, queryResult) =>{
+  let edit = (response, cookie, name, callback) => {
+    if(cookie !== undefined){
+        dbPoolInstance.query(`SELECT name, id FROM users WHERE password = '${cookie}'`, (error, queryResult) =>{
             let user = queryResult.rows[0].name;
             let id = queryResult.rows[0].id;
             dbPoolInstance.query(`SELECT author_id, card_id FROM cards INNER JOIN decks ON (deck_id = decks.id) WHERE name = '${name}'`, (error, queryResult) =>{
@@ -267,6 +325,9 @@ module.exports = (dbPoolInstance) => {
                             callback(null, queryResult.rows, user, name);
                         }
                     }
+                    else{
+                        response.redirect('/users');
+                    }
                 }
                 else{
                     response.redirect('/users');
@@ -279,42 +340,37 @@ module.exports = (dbPoolInstance) => {
     }
   };
 
-  let edited = (request, cookie, callback) => {
-    let name = request.params.name;
-    dbPoolInstance.query(`SELECT name, id FROM users WHERE password = '${request.cookies.loggedin}'`, (error, queryResult) =>{
+  let edited = (cookie, name, deckName, callback) => {
+    dbPoolInstance.query(`SELECT name, id FROM users WHERE password = '${cookie}'`, (error, queryResult) =>{
         let user = queryResult.rows[0].name;
-        dbPoolInstance.query(`SELECT author_id, card_id FROM cards INNER JOIN decks ON (deck_id = decks.id) WHERE name = '${name}'`, (error, queryResult) =>{
-            let id = queryResult.rows[0].id;
-            let deckName = request.body.name;
-            dbPoolInstance.query(`UPDATE decks SET name = '${deckName}' WHERE name = '${name}'`, (error, queryResult) =>{
-                // let newQuery = '';
-                // for(let i = 0; i < request.body.card.length; i++){
-                //     let card = request.body.card[i];
-                //     newQuery += `UPDATE cards SET card_id = '${card}' WHERE author_id = ${id};`
-                // }
-                // dbPoolInstance.query(newQuery, (error, queryResult) =>{
+        dbPoolInstance.query(`UPDATE decks SET name = '${deckName}', date_updated = 'now()' WHERE name = '${name}'`, (error, queryResult) =>{
+            console.log(queryResult.rows)
 
-                    if( error ){
+        // let newQuery = '';
+        // for(let i = 0; i < request.body.card.length; i++){
+        //     let card = request.body.card[i];
+        //     newQuery += `UPDATE cards SET card_id = '${card}' WHERE author_id = ${id};`
+        // }
+        // dbPoolInstance.query(newQuery, (error, queryResult) =>{
 
-                    // invoke callback function with results after query has executed
-                        callback(error, null, null, null);
+            if( error ){
 
-                    }
-                    else{
-                        console.log(queryResult.rows)
-                    // invoke callback function with results after query has executed
-                        callback(null, queryResult.rows, user, deckName);
-                    }
-                })
-            // })
+            // invoke callback function with results after query has executed
+                callback(error, null, null, null);
+
+            }
+            else{
+            // invoke callback function with results after query has executed
+                callback(null, queryResult.rows, user, deckName);
+            }
         })
+    // })
     })
   };
 
-  let del = (request, response, cookie, callback) => {
-    let name = request.params.name;
-    if(request.cookies.loggedin !== undefined){
-        dbPoolInstance.query(`SELECT name, id FROM users WHERE password = '${request.cookies.loggedin}'`, (error, queryResult) =>{
+  let del = (response, cookie, name, callback) => {
+    if(cookie !== undefined){
+        dbPoolInstance.query(`SELECT name, id FROM users WHERE password = '${cookie}'`, (error, queryResult) =>{
             let user = queryResult.rows[0].name;
             let id = queryResult.rows[0].id;
             dbPoolInstance.query(`SELECT author_id, card_id FROM cards INNER JOIN decks ON (deck_id = decks.id) WHERE name = '${name}'`, (error, queryResult) =>{
@@ -334,6 +390,9 @@ module.exports = (dbPoolInstance) => {
                                     callback(null, queryResult.rows);
                                 }
                         })
+                    }
+                    else{
+                        response.redirect('/profile');
                     }
                 }
                 else{

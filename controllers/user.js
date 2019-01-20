@@ -8,8 +8,8 @@ module.exports = (db) => {
    let cards = [];
 
     let index = (request, response) => {
-        let cookie = request.cookies.loggedin
-        db.pokemons.home(request, response, cookie, (error, result, user) => {
+        let cookie = request.cookies.loggedin;
+        db.pokemons.home(response, cookie, (error, result, user) => {
             response.render('home', {user});
       });
     };
@@ -41,61 +41,67 @@ module.exports = (db) => {
 
     let signOut = (request, response) => {
         response.clearCookie('loggedin');
-
         response.redirect('/');
     };
 
     let profile = (request, response) => {
-        let cookie = request.cookies.loggedin
-        db.pokemons.profile(request, response, cookie, (error, result, user) => {
+        let cookie = request.cookies.loggedin;
+        let sort = request.query.sortby;
+        db.pokemons.profile(response, cookie, sort, (error, result, user) => {
             response.render('profile', {profile:user, decks:result});
       });
     };
 
     let users = (request, response) => {
-        db.pokemons.list(request, response, (error, result) => {
+        db.pokemons.list((error, result) => {
             response.render('users', {result});
       });
     };
 
     let userProfile = (request, response) => {
         let id = request.params.id;
-        db.pokemons.user(request, response, id, (error, result, user) => {
+        db.pokemons.user(id, (error, result, user) => {
             response.render('profile', {profile:user, decks:result});
       });
     };
 
     let deck = (request, response) => {
         let cookie = request.cookies.loggedin;
-        db.pokemons.cards(request, response, cookie, (error, result, user) => {
+        db.pokemons.cards(response, cookie, (error, result, user) => {
             response.render('deck', {user});
       });
     }
 
     let newDeck = (request, response) => {
         let cookie = request.cookies.loggedin;
-        db.pokemons.create(request, cookie, (error, result, name) => {
+        let name = request.body.name;
+        let card = request.body.card;
+        db.pokemons.create(cookie, name, card, (error, result, name) => {
             response.render('newdeck', {cards:result, deck:name});
       });
     };
 
     let viewDeck = (request, response) => {
-        db.pokemons.view(request, (error, result, user, name) => {
+        let name = request.params.name;
+        db.pokemons.view(name, (error, result, user, name) => {
             response.render('viewdeck', {cards:result, deck:name, user:user});
       });
     };
 
     let editDeck = (request, response) => {
         let cookie = request.cookies.loggedin;
-        db.pokemons.edit(request, response, cookie, (error, result, user, name) => {
+        let name = request.params.name;
+        db.pokemons.edit(response, cookie, name, (error, result, user, name) => {
             response.render('editdeck', {cards:result, deck:name, user:user});
       });
     };
 
     let editedDeck = (request, response) => {
         let cookie = request.cookies.loggedin;
-        db.pokemons.edited(request, cookie, (error, result, user, name) => {
-            console.log(result)
+        let name = request.params.name;
+        let deckName = request.body.name;
+        db.pokemons.edited(cookie, name, deckName, (error, result, user, name) => {
+            // console.log(result)
             // response.render('viewdeck', {cards:result, deck:name, user:user});
             response.redirect('/profile')
       });
@@ -103,7 +109,8 @@ module.exports = (db) => {
 
     let deleteDeck = (request, response) => {
         let cookie = request.cookies.loggedin;
-        db.pokemons.del(request, response, cookie, (error, result) => {
+        let name = request.params.name;
+        db.pokemons.del(response, cookie, name, (error, result) => {
             // response.render('viewdeck', {cards:result, deck:name, user:user});
             response.redirect('/profile')
       });

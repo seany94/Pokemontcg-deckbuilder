@@ -11,6 +11,8 @@ CREATE TABLE IF NOT EXISTS decks (
     id SERIAL PRIMARY KEY,
     name TEXT,
     author_id INT,
+    date_created DATE NOT NULL DEFAULT CURRENT_DATE,
+    date_updated DATE,
     FOREIGN KEY (author_id) REFERENCES users(id)
 );
 

@@ -104,6 +104,11 @@ strong{
 	max-width: 370px;
 }
 
+#exampleFormControlSelect1{
+	display: inline;
+	margin: 0 20px;
+}
+
 .form-control, .custom-file{
 	width: 380px;
 	text-shadow: none;
