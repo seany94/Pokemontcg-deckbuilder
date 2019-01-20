@@ -17,21 +17,31 @@ Additional stuff:-
 1. Build using MVC
 2. Upload user profile image
 3. Create user profile with their decks they created
+4. Create rules to deck creation
+5. Limit guess features only allow sign in user to access those features
 
 Milestone:-
 
 MVP: Display database of Pokemon cards. All users can view them. Allow users to sort cards typing ex: Pokemon/trainer/energy
 
-Further: Sign in/up form and allow users to create/edit new a deck
+Further: Sign in/up form and use ajax for api request. Use dom to append api data
 
-Further: Allow users to delete deck
+Further: Only allow create, edit and deck when sign in and only sign in user can edit and delete their own respective decks.
 
-Further: Create user profile with their decks they created, Upload user profile image
+Further: Allow user to see their own profile tab when sign in
+
+Further: Allow user to view deck they or other users created in respective profile or under user tab
+
+Further: Validate user login to avoid re-sign in
 
 Further: Allow users to click on card image and a pop up modal will show the card’s details with high resolution image
 
+Further: List of decks users created can be sorted by date created/edited/name/deck_id/rating
+
 Further: User that are log in are able to access deck tab to see other users’ created decks and they can add comment/review and rate them
 
-Further: List of decks users created can be sorted by date created/edited/rating
-
 Further: Allows user to see similar type of deck with same typing as theirs as recommended
+
+Further: Add create deck logic
+
+Further: Allow user to upload profile image

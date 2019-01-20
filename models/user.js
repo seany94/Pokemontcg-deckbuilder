@@ -113,85 +113,23 @@ module.exports = (dbPoolInstance) => {
     })
   };
 
-  let profile = (response, cookie, sort, callback) => {
+  let profile = (response, cookie, callback) => {
     if(cookie !== undefined){
         dbPoolInstance.query(`SELECT * FROM users WHERE password = '${cookie}'`, (error, queryResult) =>{
             let user = queryResult.rows;
-            if(sort === 'datecr'){
-                dbPoolInstance.query(`SELECT decks.name FROM decks INNER JOIN users ON (users.id = author_id AND users.password = '${cookie}') ORDER BY date_created ASC`, (error, queryResult) =>{
-                    if( error ){
+            dbPoolInstance.query(`SELECT decks.name FROM decks INNER JOIN users ON (users.id = author_id AND users.password = '${cookie}')`, (error, queryResult) =>{
+                if( error ){
 
-                        // invoke callback function with results after query has executed
-                        callback(error, null, null);
+                    // invoke callback function with results after query has executed
+                    callback(error, null, null);
 
-                      }
-                      else{
+                  }
+                  else{
 
-                        // invoke callback function with results after query has executed
-                        callback(null, queryResult.rows, user);
-                      }
-                })
-            }
-            else if(sort === 'dateup'){
-                dbPoolInstance.query(`SELECT decks.name FROM decks INNER JOIN users ON (users.id = author_id AND users.password = '${cookie}') ORDER BY date_updated ASC`, (error, queryResult) =>{
-                    if( error ){
-
-                        // invoke callback function with results after query has executed
-                        callback(error, null, null);
-
-                      }
-                      else{
-
-                        // invoke callback function with results after query has executed
-                        callback(null, queryResult.rows, user);
-                      }
-                })
-            }
-            else if(sort === 'nameasc'){
-                dbPoolInstance.query(`SELECT decks.name FROM decks INNER JOIN users ON (users.id = author_id AND users.password = '${cookie}') ORDER BY decks.name ASC`, (error, queryResult) =>{
-                    if( error ){
-
-                        // invoke callback function with results after query has executed
-                        callback(error, null, null);
-
-                      }
-                      else{
-
-                        // invoke callback function with results after query has executed
-                        callback(null, queryResult.rows, user);
-                      }
-                })
-            }
-            else if(sort === 'deckid'){
-                dbPoolInstance.query(`SELECT decks.name FROM decks INNER JOIN users ON (users.id = author_id AND users.password = '${cookie}') ORDER BY decks.id ASC`, (error, queryResult) =>{
-                    if( error ){
-
-                        // invoke callback function with results after query has executed
-                        callback(error, null, null);
-
-                      }
-                      else{
-
-                        // invoke callback function with results after query has executed
-                        callback(null, queryResult.rows, user);
-                      }
-                })
-            }
-            else{
-                dbPoolInstance.query(`SELECT decks.name FROM decks INNER JOIN users ON (users.id = author_id AND users.password = '${cookie}')`, (error, queryResult) =>{
-                    if( error ){
-
-                        // invoke callback function with results after query has executed
-                        callback(error, null, null);
-
-                      }
-                      else{
-
-                        // invoke callback function with results after query has executed
-                        callback(null, queryResult.rows, user);
-                      }
-                })
-            }
+                    // invoke callback function with results after query has executed
+                    callback(null, queryResult.rows, user);
+                  }
+            })
         })
     }
     else{
@@ -215,22 +153,84 @@ module.exports = (dbPoolInstance) => {
     })
   };
 
-  let user = (id, callback) => {
+  let user = (id, sort, callback) => {
     dbPoolInstance.query(`SELECT * FROM users WHERE id = '${id}'`, (error, queryResult) =>{
             let user = queryResult.rows;
-            dbPoolInstance.query(`SELECT decks.name FROM decks INNER JOIN users ON (users.id = author_id AND users.id = '${id}')`, (error, queryResult) =>{
-                if( error ){
+            if(sort === 'datecr'){
+                dbPoolInstance.query(`SELECT decks.name FROM decks INNER JOIN users ON (users.id = author_id AND users.id = '${id}') ORDER BY date_created ASC`, (error, queryResult) =>{
+                    if( error ){
 
-                    // invoke callback function with results after query has executed
-                    callback(error, null, null);
+                        // invoke callback function with results after query has executed
+                        callback(error, null, null);
 
-                  }
-                  else{
+                      }
+                      else{
 
-                    // invoke callback function with results after query has executed
-                    callback(null, queryResult.rows, user);
-                  }
-            })
+                        // invoke callback function with results after query has executed
+                        callback(null, queryResult.rows, user);
+                      }
+                })
+            }
+            else if(sort === 'dateup'){
+                dbPoolInstance.query(`SELECT decks.name FROM decks INNER JOIN users ON (users.id = author_id AND users.id = '${id}') ORDER BY date_updated ASC`, (error, queryResult) =>{
+                    if( error ){
+
+                        // invoke callback function with results after query has executed
+                        callback(error, null, null);
+
+                      }
+                      else{
+
+                        // invoke callback function with results after query has executed
+                        callback(null, queryResult.rows, user);
+                      }
+                })
+            }
+            else if(sort === 'nameasc'){
+                dbPoolInstance.query(`SELECT decks.name FROM decks INNER JOIN users ON (users.id = author_id AND users.id = '${id}') ORDER BY decks.name ASC`, (error, queryResult) =>{
+                    if( error ){
+
+                        // invoke callback function with results after query has executed
+                        callback(error, null, null);
+
+                      }
+                      else{
+
+                        // invoke callback function with results after query has executed
+                        callback(null, queryResult.rows, user);
+                      }
+                })
+            }
+            else if(sort === 'deckid'){
+                dbPoolInstance.query(`SELECT decks.name FROM decks INNER JOIN users ON (users.id = author_id AND users.id = '${id}') ORDER BY decks.id ASC`, (error, queryResult) =>{
+                    if( error ){
+
+                        // invoke callback function with results after query has executed
+                        callback(error, null, null);
+
+                      }
+                      else{
+
+                        // invoke callback function with results after query has executed
+                        callback(null, queryResult.rows, user);
+                      }
+                })
+            }
+            else{
+                dbPoolInstance.query(`SELECT decks.name FROM decks INNER JOIN users ON (users.id = author_id AND users.id = '${id}')`, (error, queryResult) =>{
+                    if( error ){
+
+                        // invoke callback function with results after query has executed
+                        callback(error, null, null);
+
+                      }
+                      else{
+
+                        // invoke callback function with results after query has executed
+                        callback(null, queryResult.rows, user);
+                      }
+                })
+            }
         })
   };
 
@@ -326,11 +326,11 @@ module.exports = (dbPoolInstance) => {
                         }
                     }
                     else{
-                        response.redirect('/users');
+                        response.redirect('/profile');
                     }
                 }
                 else{
-                    response.redirect('/users');
+                    response.redirect('/profile');
                 }
             })
         })

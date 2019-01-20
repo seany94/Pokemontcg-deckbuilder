@@ -46,8 +46,7 @@ module.exports = (db) => {
 
     let profile = (request, response) => {
         let cookie = request.cookies.loggedin;
-        let sort = request.query.sortby;
-        db.pokemons.profile(response, cookie, sort, (error, result, user) => {
+        db.pokemons.profile(response, cookie, (error, result, user) => {
             response.render('profile', {profile:user, decks:result});
       });
     };
@@ -60,7 +59,8 @@ module.exports = (db) => {
 
     let userProfile = (request, response) => {
         let id = request.params.id;
-        db.pokemons.user(id, (error, result, user) => {
+        let sort = request.query.sortby;
+        db.pokemons.user(id, sort, (error, result, user) => {
             response.render('profile', {profile:user, decks:result});
       });
     };
