@@ -22,7 +22,7 @@ Milestone:-
 
 MVP: Display database of Pokemon cards. All users can view them. Allow users to sort cards typing ex: Pokemon/trainer/energy
 
-MVP: Sign in/up form and allow users to create/edit new a deck
+Further: Sign in/up form and allow users to create/edit new a deck
 
 Further: Allow users to delete deck
 

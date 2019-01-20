@@ -27,13 +27,19 @@ class Newdeck extends React.Component {
                     </button>
                 </div>
                 <div className="gallery">
-                    <h3>Deck name: {this.props.deck}</h3>
-                    <div class="spinner-border text-warning float-right" role="status">
+                    <h3>Deck name: {this.props.deck}
+                        <div class="spinner-border text-warning float-right" role="status">
+                        </div>
+                    </h3>
+                </div>
+                <div id="deck">
+                    <div id="cards">
+                        {deck}
                     </div>
                 </div>
-                <div id="newdeck">
-                    {deck}
-                </div>
+                <form method="GET" action="/profile">
+                    <input type="submit" id="profile" value="Profile" />
+                </form>
             </Defaultcss>
         );
       }

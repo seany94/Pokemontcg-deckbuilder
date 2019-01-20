@@ -9,6 +9,10 @@ body{
 	font-size: 18px;
 }
 
+#form{
+	display: inline;
+	padding: 0 15px 0 0;
+}
 
 input{
 	background-color: rgb(150, 55, 60);
@@ -38,12 +42,12 @@ input{
 	text-align: center;
 }
 
-.gallery{
+.gallery, .deckhead{
 	display: inline;
   text-align: center;
 }
 
-#newdeck{
+#deck{
 	pointer-events: none;
 	overflow-y: scroll;
   position: relative;
@@ -52,7 +56,7 @@ input{
   text-align: center;
 }
 
-#pokemons, #deck{
+#pokemons, #newdeck{
 	overflow-y: scroll;
   position: relative;
   height: 400px;

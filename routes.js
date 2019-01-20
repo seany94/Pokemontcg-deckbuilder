@@ -20,6 +20,8 @@ module.exports = (app, db) => {
   app.get('/profile', pokemons.profile);
   app.get('/users', pokemons.users);
   app.get('/users/:id', pokemons.userProfile);
-  app.get('/profile/deck/:name', pokemons.viewDeck);
+  app.get('/users/deck/:name', pokemons.viewDeck);
+  app.get('/profile/deck/edit/:name', pokemons.editDeck);
+  app.put('/profile/deck/edit/:name', pokemons.editedDeck);
 
 };

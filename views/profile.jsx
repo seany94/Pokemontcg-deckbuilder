@@ -5,9 +5,13 @@ class Decks extends React.Component{
     render(){
         return(
             <div>
-                <form method="GET" action={"/profile/deck/" + this.props.list.name}>
-                {this.props.list.name}<span> </span>
+                {this.props.list.name}
+                <br/>
+                <form method="GET" id="form" action={"/users/deck/" + this.props.list.name}>
                     <input type="submit" className="decks" value="View" />
+                </form>
+                <form method="GET" id="form" action={"/profile/deck/edit/" + this.props.list.name}>
+                    <input type="submit" className="decks" value="Edit" />
                 </form>
             </div>
             );

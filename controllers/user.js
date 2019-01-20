@@ -84,6 +84,20 @@ module.exports = (db) => {
             response.render('viewdeck', {cards:result, deck:name, user:user});
       });
     };
+
+    let editDeck = (request, response) => {
+        let cookie = request.cookies.loggedin;
+        db.pokemons.edit(request, response, cookie, (error, result, user, name) => {
+            response.render('editdeck', {cards:result, deck:name, user:user});
+      });
+    };
+
+    let editedDeck = (request, response) => {
+        let cookie = request.cookies.loggedin;
+        db.pokemons.edited(request, cookie, (error, result, user, name) => {
+            response.render('viewdeck', {cards:result, deck:name, user:user});
+      });
+    };
   /**
    * ===========================================
    * Export controller functions as a module
@@ -101,7 +115,9 @@ module.exports = (db) => {
     userProfile,
     deck,
     newDeck,
-    viewDeck
+    viewDeck,
+    editDeck,
+    editedDeck
   };
 
 }

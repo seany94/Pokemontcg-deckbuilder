@@ -26,11 +26,9 @@ class Details extends React.Component{
                 </div>
               </div>
             </div>
-                <ul>{this.props.list.name} <span> </span>
-                    <input type="submit" value="View Details" data-toggle="modal" data-target={"#exampleModal" + this.props.list.id}/>
-                </ul>
-                <ul><img src={this.props.list.photo_url} alt="broken link" height="270" width="270" /><br/><span>{this.props.list.photo_url}</span></ul>
-                <ul>{this.props.list.nationality}</ul>
+                <ul>{this.props.list.name} from {this.props.list.nationality}</ul>
+                <ul><img src={this.props.list.photo_url} alt="broken link" height="270" width="270" /></ul>
+                <input type="submit" value="View Details" data-toggle="modal" data-target={"#exampleModal" + this.props.list.id}/>
             </div>
             );
     }

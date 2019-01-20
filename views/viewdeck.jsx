@@ -4,7 +4,7 @@ var Defaultcss = require('./defaultcss');
 class Cards extends React.Component{
     render(){
         return(
-            <div>
+            <div className="inputhidden">
                 <input type="submit" type="hidden" id="cards" value={this.props.list.card_id} />
             </div>
             );
@@ -26,16 +26,19 @@ class Viewdeck extends React.Component {
                     <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div className="gallery">
-                    <h3>Deck name: {this.props.deck}</h3>
-                    <div class="spinner-border text-warning float-right" role="status">
+                <div className="deckhead">
+                    <h3>Deck name: {this.props.deck}
+                        <div class="spinner-border text-warning float-right" role="status">
+                        </div>
+                    </h3>
+                </div>
+                <div id="deck">
+                    <div id="cards">
+                        {deck}
                     </div>
                 </div>
-                <div id="newdeck">
-                    {deck}
-                </div>
                 <form method="GET" action="/">
-                    <input type="submit" className="new" value="Home" />
+                    <input type="submit" id="new" value="Home" />
                 </form>
             </Defaultcss>
         );
