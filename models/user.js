@@ -285,26 +285,67 @@ module.exports = (dbPoolInstance) => {
         let user = queryResult.rows[0].name;
         dbPoolInstance.query(`SELECT author_id, card_id FROM cards INNER JOIN decks ON (deck_id = decks.id) WHERE name = '${name}'`, (error, queryResult) =>{
             let id = queryResult.rows[0].id;
-            let newQuery = '';
-                for(let i = 0; i < request.body.card.length; i++){
-                    let card = request.body.card[i];
-                    newQuery += `UPDATE cards SET card_id = '${card}' WHERE author_id = '${id}'`
-                }
-                console.log(request.body.card)
-            dbPoolInstance.query(newQuery, (error, queryResult) =>{
-                if( error ){
+            let deckName = request.body.name;
+            dbPoolInstance.query(`UPDATE decks SET name = '${deckName}' WHERE name = '${name}'`, (error, queryResult) =>{
+                // let newQuery = '';
+                // for(let i = 0; i < request.body.card.length; i++){
+                //     let card = request.body.card[i];
+                //     newQuery += `UPDATE cards SET card_id = '${card}' WHERE author_id = ${id};`
+                // }
+                // dbPoolInstance.query(newQuery, (error, queryResult) =>{
 
-                // invoke callback function with results after query has executed
-                    callback(error, null, null, null);
+                    if( error ){
 
-                }
-                else{
-                // invoke callback function with results after query has executed
-                    callback(null, queryResult.rows, user, name);
-                }
-            })
+                    // invoke callback function with results after query has executed
+                        callback(error, null, null, null);
+
+                    }
+                    else{
+                        console.log(queryResult.rows)
+                    // invoke callback function with results after query has executed
+                        callback(null, queryResult.rows, user, deckName);
+                    }
+                })
+            // })
         })
     })
+  };
+
+  let del = (request, response, cookie, callback) => {
+    let name = request.params.name;
+    if(request.cookies.loggedin !== undefined){
+        dbPoolInstance.query(`SELECT name, id FROM users WHERE password = '${request.cookies.loggedin}'`, (error, queryResult) =>{
+            let user = queryResult.rows[0].name;
+            let id = queryResult.rows[0].id;
+            dbPoolInstance.query(`SELECT author_id, card_id FROM cards INNER JOIN decks ON (deck_id = decks.id) WHERE name = '${name}'`, (error, queryResult) =>{
+                if(queryResult.rows.length){
+                    if(id === queryResult.rows[0].author_id){
+                        let newQuery = `ALTER TABLE cards DROP CONSTRAINT IF EXISTS cards_deck_id_fkey; DELETE from decks WHERE name = '${name}'`;
+                        dbPoolInstance.query(newQuery, (error, queryResult) =>{
+
+                                if( error ){
+
+                                // invoke callback function with results after query has executed
+                                    callback(error, null);
+
+                                }
+                                else{
+                                // invoke callback function with results after query has executed
+                                    callback(null, queryResult.rows);
+                                }
+                        })
+                    }
+                }
+                else{
+                    response.redirect('/profile');
+                }
+            })
+
+        })
+    }
+    else{
+        response.redirect('/user/signin');
+    }
   };
 
 
@@ -319,6 +360,7 @@ module.exports = (dbPoolInstance) => {
     create,
     view,
     edit,
-    edited
+    edited,
+    del
   };
 };

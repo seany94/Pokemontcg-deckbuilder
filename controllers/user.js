@@ -95,7 +95,16 @@ module.exports = (db) => {
     let editedDeck = (request, response) => {
         let cookie = request.cookies.loggedin;
         db.pokemons.edited(request, cookie, (error, result, user, name) => {
+            console.log(result)
             response.render('viewdeck', {cards:result, deck:name, user:user});
+      });
+    };
+
+    let deleteDeck = (request, response) => {
+        let cookie = request.cookies.loggedin;
+        db.pokemons.del(request, response, cookie, (error, result) => {
+            // response.render('viewdeck', {cards:result, deck:name, user:user});
+            response.redirect('/')
       });
     };
   /**
@@ -117,7 +126,8 @@ module.exports = (db) => {
     newDeck,
     viewDeck,
     editDeck,
-    editedDeck
+    editedDeck,
+    deleteDeck
   };
 
 }

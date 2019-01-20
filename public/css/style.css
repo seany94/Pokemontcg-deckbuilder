@@ -21,6 +21,10 @@ input{
 	margin: 10px 0;
 }
 
+strong{
+	color: black;
+}
+
 .decks{
 	display: inline-block;
 }

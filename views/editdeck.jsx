@@ -28,7 +28,11 @@ class Editdeck extends React.Component {
                   </button>
                 </div>
                 <div className="deckhead">
-                    <h3>Deck name: {this.props.deck}
+                    <h3>Deck name:
+                        <form method="POST" action={"/profile/deck/" + this.props.deck + "?_method=PUT"}>
+                        <input type="text" name="name" className="form-control mx-auto" placeholder="Name of deck" value={this.props.deck} />
+                        <input type="submit" id="edit" value="Edit Name"/>
+                        </form>
                         <div class="spinner-border text-warning float-right" role="status">
                         </div>
                     </h3>
@@ -46,8 +50,8 @@ class Editdeck extends React.Component {
                     </div>
                 </div>
                 <div id="deck">
-                    <form method="POST" action={"/profile/deck/edit/" + this.props.deck}>
-                        <input type="submit" id="edit" value="Edit Deck"/>
+                    <form method="POST" action={"/profile/deck/" + this.props.deck + "?_method=PUT"}>
+                        <input type="submit" id="nw" value="Not working"/>
                         <div id="cards">
                             {deck}
                         </div>

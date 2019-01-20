@@ -15,7 +15,7 @@ class Details extends React.Component{
                     </button>
                   </div>
                   <div className="modal-body text-danger">
-                    Remember to sign in before going to other users profile in order to rate their decks. Click <strong>close</strong> to return to menu or click <strong>confirm</strong> to proceed to desired user's profile.
+                    Remember to sign in before going to other users profile in order to rate their decks. Click <strong>Close</strong> to return to menu or click <strong>View Profile</strong> to proceed to desired user's profile.
                   </div>
                   <div className="modal-footer">
                     <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>

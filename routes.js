@@ -22,6 +22,7 @@ module.exports = (app, db) => {
   app.get('/users/:id', pokemons.userProfile);
   app.get('/users/deck/:name', pokemons.viewDeck);
   app.get('/profile/deck/edit/:name', pokemons.editDeck);
-  app.put('/profile/deck/edit/:name', pokemons.editedDeck);
+  app.put('/profile/deck/:name', pokemons.editedDeck);
+  app.delete('/profile/deck/delete/:name', pokemons.deleteDeck);
 
 };

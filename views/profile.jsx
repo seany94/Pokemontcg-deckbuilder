@@ -5,14 +5,38 @@ class Decks extends React.Component{
     render(){
         return(
             <div>
-                {this.props.list.name}
-                <br/>
-                <form method="GET" id="form" action={"/users/deck/" + this.props.list.name}>
-                    <input type="submit" className="decks" value="View" />
-                </form>
-                <form method="GET" id="form" action={"/profile/deck/edit/" + this.props.list.name}>
-                    <input type="submit" className="decks" value="Edit" />
-                </form>
+                <div className="modal fade" id={"exampleModal" + this.props.list.name} tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div className="modal-dialog" role="document">
+                        <div className="modal-content">
+                          <div className="modal-header">
+                            <h5 className="modal-title text-danger" id="exampleModalLabel">WARNING!!!</h5>
+                            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div className="modal-body text-danger">
+                            You are about to delete the deck name <strong>{this.props.list.name}</strong>. Are you sure about it? Click <strong>Close</strong> to return to profile or click <strong>Confirm</strong> to proceed with the deletion.
+                          </div>
+                          <div className="modal-footer">
+                            <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <form method="POST" action={"/profile/deck/delete/" + this.props.list.name + "?_method=delete"}>
+                                <button type="submit" value="Delete" className="btn btn-primary">Confirm</button>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                <div>
+                    {this.props.list.name}
+                    <br/>
+                    <form method="GET" id="form" action={"/users/deck/" + this.props.list.name}>
+                        <input type="submit" className="decks" value="View" />
+                    </form>
+                    <form method="GET" id="form" action={"/profile/deck/edit/" + this.props.list.name}>
+                        <input type="submit" className="decks" value="Edit" />
+                    </form>
+                    <input type="submit" className="details" value="Delete" data-toggle="modal" data-target={"#exampleModal" + this.props.list.name}/>
+                </div>
             </div>
             );
     }
