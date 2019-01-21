@@ -13,6 +13,7 @@ CREATE TABLE IF NOT EXISTS decks (
     author_id INT,
     date_created DATE NOT NULL DEFAULT CURRENT_DATE,
     date_updated DATE,
+    rating INT,
     FOREIGN KEY (author_id) REFERENCES users(id)
 );
 

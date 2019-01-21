@@ -24,5 +24,6 @@ module.exports = (app, db) => {
   app.get('/profile/deck/edit/:name', pokemons.editDeck);
   app.put('/profile/deck/:name', pokemons.editedDeck);
   app.delete('/profile/deck/delete/:name', pokemons.deleteDeck);
+  app.put('/profile/deck/:name/rating', pokemons.star);
 
 };

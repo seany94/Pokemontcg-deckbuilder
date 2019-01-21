@@ -25,6 +25,29 @@ strong{
 	color: black;
 }
 
+.rating {
+  unicode-bidi: bidi-override;
+  direction: rtl;
+  display: inline;
+  margin: 0 5px;
+}
+.rating > label {
+  display: inline-block;
+  position: relative;
+  width: 20px;
+}
+.rating > label.active:before,
+.rating > label.active ~ label:before,
+.rating > label:hover:before,
+.rating > label:hover ~ label:before {
+  content: "\2605";
+  position: absolute;
+}
+
+.star{
+	display: none;
+}
+
 #search{
 	margin: 10px auto;
 }

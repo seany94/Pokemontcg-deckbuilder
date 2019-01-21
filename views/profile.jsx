@@ -28,6 +28,25 @@ class Decks extends React.Component{
                     </div>
                 <div>
                     {this.props.list.name}
+                    <form method="POST" id="form" action={"/profile/deck/" + this.props.list.name + "/rating?_method=PUT"}>
+                        <div className="rating">
+                            <label>☆
+                              <input type="radio" className="star" name="starValue" value="5" />
+                            </label>
+                            <label>☆
+                              <input type="radio" className="star" name="starValue" value="4" />
+                            </label>
+                            <label>☆
+                              <input type="radio" className="star" name="starValue" value="3" />
+                            </label>
+                            <label>☆
+                              <input type="radio" className="star" name="starValue" value="2" />
+                            </label>
+                            <label>☆
+                              <input type="radio" className="star" name="starValue" value="1" />
+                            </label>
+                          </div>
+                    </form>
                     <br/>
                     <form method="GET" id="form" action={"/users/deck/" + this.props.list.name}>
                         <input type="submit" className="decks" value="View" />

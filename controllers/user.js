@@ -113,6 +113,17 @@ module.exports = (db) => {
             response.redirect('/profile')
       });
     };
+
+    let star = (request, response) => {
+        let cookie = request.cookies.loggedin;
+        let name = request.params.name;
+        let value = request.body.name;
+        console.log(value)
+        db.pokemons.rating(response, cookie, name, value, (error, result, user, name) => {
+            console.log(result)
+            response.render('profile', {cards:result, deck:name, user:user});
+      });
+    };
   /**
    * ===========================================
    * Export controller functions as a module
@@ -133,7 +144,8 @@ module.exports = (db) => {
     viewDeck,
     editDeck,
     editedDeck,
-    deleteDeck
+    deleteDeck,
+    star
   };
 
 }

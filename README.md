@@ -36,9 +36,9 @@ Further: Validate user login to avoid re-sign in
 
 Further: Allow users to click on card image and a pop up modal will show the card’s details with high resolution image
 
-Further: List of decks users created can be sorted by date created/edited/name/deck_id/rating
-
 Further: Search filter function for cards
+
+Further: List of decks users created can be sorted by date created/edited/name/deck_id/rating
 
 Further: User that are log in are able to access deck tab to see other users’ created decks and they can add comment/review and rate them
 

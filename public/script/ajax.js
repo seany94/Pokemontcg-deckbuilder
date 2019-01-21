@@ -1,5 +1,18 @@
 window.onload = function(){
 
+var label = document.getElementsByTagName('label');
+for(let i = 0; i < label.length; i++){
+    label[i].addEventListener('click', function(){
+        label[i].classList.remove('active');
+        label[i].classList.add('active');
+    });
+    if(label[i].classList.contains('active')){
+        let rating = document.createElement('input');
+        rating.setAttribute('type', 'submit');
+        document.querySelector('.rating').appendChild(rating);
+    }
+}
+
     if(document.querySelector('#pokecard') != null && document.querySelector('#traincard') != null && document.querySelector('#energycard') != null){
         var pokeButton = document.querySelector('#pokecard')
 
@@ -34,7 +47,6 @@ window.onload = function(){
                     document.querySelector('.spinner-border').style.visibility = "hidden";
                 }, 10000);
             }
-
         }
     }
 };
@@ -201,6 +213,15 @@ var ajaxOutput = function(input){
                         }
                     }
                 }
+
+                // if(document.querySelector('#deck') != null){
+                //     let deleteButton = document.querySelector('#delete' + i)
+
+                //     deleteButton.addEventListener('click', function(){
+                //         document.querySelector('#modal').removeChild(document.querySelector(`#pokeimg${input}`));
+                //         document.querySelector('.inputhidden').removeChild(document.querySelector('#card'));
+                //     });
+                // }
             });
             document.querySelector('#deck').appendChild(pokeLarge);
 
