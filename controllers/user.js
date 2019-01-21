@@ -97,7 +97,7 @@ module.exports = (db) => {
     let editedDeck = (request, response) => {
         let cookie = request.cookies.loggedin;
         let name = request.params.name;
-        let deckName = request.body.value;
+        let deckName = request.body.name;
         db.pokemons.edited(cookie, name, deckName, (error, result, user, name) => {
             // console.log(result)
             // response.render('viewdeck', {cards:result, deck:name, user:user});
