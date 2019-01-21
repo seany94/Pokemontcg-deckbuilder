@@ -39,6 +39,19 @@ window.onload = function(){
     }
 };
 
+var search = function() {
+  const pokemon = Array.from(document.querySelectorAll('.modals'));
+  let filter = document.querySelector('#search').value.toLowerCase();
+  for (let i = 0; i < pokemon.length; i++) {
+    let txtValue = pokemon[i].id;
+    if (txtValue.toLowerCase().indexOf(filter) > -1) {
+      pokemon[i].style.display = "";
+    } else {
+      pokemon[i].style.display = "none";
+    }
+  }
+}
+
 var ajaxOutput = function(input){
 
     var ajaxUrl = `https://api.pokemontcg.io/v1/cards?id=${input}`;
@@ -214,11 +227,12 @@ var ajax = function(input){
     var ajaxUrl = `https://api.pokemontcg.io/v1/cards?${input}&pageSize=860`;
 
     if(document.querySelector("section") == null){
-        // let pokeSearch = document.createElement('input');
-        // pokeSearch.setAttribute('class', 'form-control');
-        // pokeSearch.setAttribute('onkeyup', 'search()');
-        // pokeSearch.setAttribute('placeholder', 'Search');
-        // document.querySelector('.gallery').appendChild(pokeSearch)
+        let pokeSearch = document.createElement('input');
+        pokeSearch.setAttribute('id', 'search');
+        pokeSearch.setAttribute('class', 'form-control');
+        pokeSearch.setAttribute('onkeyup', 'search()');
+        pokeSearch.setAttribute('placeholder', 'Search');
+        document.querySelector('.gallery').appendChild(pokeSearch)
 
         var pokemons = document.createElement("section");
         pokemons.setAttribute("id", "pokemons");
@@ -231,7 +245,8 @@ var ajax = function(input){
             for(let i = 0; i < jsonData.cards.length; i++){
 
                 let pokeLarge = document.createElement('a');
-                pokeLarge.setAttribute('id', 'modal');
+                pokeLarge.setAttribute('id', `${jsonData.cards[i].name}`);
+                pokeLarge.setAttribute('class', 'modals');
                 pokeLarge.setAttribute('data-toggle', 'modal');
                 pokeLarge.setAttribute('data-target', '#exampleModal' + i);
 

@@ -25,6 +25,10 @@ strong{
 	color: black;
 }
 
+#search{
+	margin: 10px auto;
+}
+
 .decks{
 	display: inline-block;
 }

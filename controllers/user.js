@@ -5,8 +5,6 @@ module.exports = (db) => {
    * ===========================================
    */
 
-   let cards = [];
-
     let index = (request, response) => {
         let cookie = request.cookies.loggedin;
         db.pokemons.home(response, cookie, (error, result, user) => {
