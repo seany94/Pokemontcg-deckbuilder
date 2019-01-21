@@ -344,7 +344,7 @@ module.exports = (dbPoolInstance) => {
     dbPoolInstance.query(`SELECT name, id FROM users WHERE password = '${cookie}'`, (error, queryResult) =>{
         let user = queryResult.rows[0].name;
         dbPoolInstance.query(`UPDATE decks SET name = '${deckName}', date_updated = 'now()' WHERE name = '${name}'`, (error, queryResult) =>{
-            console.log(queryResult.rows)
+            // console.log(queryResult.rows)
 
         // let newQuery = '';
         // for(let i = 0; i < request.body.card.length; i++){
@@ -407,30 +407,6 @@ module.exports = (dbPoolInstance) => {
     }
   };
 
-    let rating = (response, cookie, name, value, callback) => {
-    if(cookie !== undefined){
-        dbPoolInstance.query(`SELECT name, id FROM users WHERE password = '${cookie}'`, (error, queryResult) =>{
-            let user = queryResult.rows[0].name;
-            let id = queryResult.rows[0].id;
-            dbPoolInstance.query(`UPDATE decks SET rating = ${value}, date_updated = 'now()' WHERE name = '${name}'`, (error, queryResult) =>{
-                if( error ){
-
-                // invoke callback function with results after query has executed
-                    callback(error, null, null, null);
-
-                }
-                else{
-                // invoke callback function with results after query has executed
-                    callback(null, queryResult.rows, user, name);
-                }
-            })
-        })
-    }
-    else{
-        response.redirect('/user/signin');
-    }
-  };
-
   return {
     home,
     signUp,
@@ -443,7 +419,6 @@ module.exports = (dbPoolInstance) => {
     view,
     edit,
     edited,
-    del,
-    rating
+    del
   };
 };

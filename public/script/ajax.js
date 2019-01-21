@@ -5,12 +5,13 @@ for(let i = 0; i < label.length; i++){
     label[i].addEventListener('click', function(){
         label[i].classList.remove('active');
         label[i].classList.add('active');
+        // let labelVal = label[i].querySelector('.star').value;
+        // let rateInput = document.createElement("input");
+        // rateInput.setAttribute("type", "hidden");
+        // rateInput.setAttribute("name", "rate");
+        // rateInput.setAttribute("value", `${labelVal}`);
+        // document.querySelector('#rate').appendChild(rateInput);
     });
-    if(label[i].classList.contains('active')){
-        let rating = document.createElement('input');
-        rating.setAttribute('type', 'submit');
-        document.querySelector('.rating').appendChild(rating);
-    }
 }
 
     if(document.querySelector('#pokecard') != null && document.querySelector('#traincard') != null && document.querySelector('#energycard') != null){

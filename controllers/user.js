@@ -97,7 +97,7 @@ module.exports = (db) => {
     let editedDeck = (request, response) => {
         let cookie = request.cookies.loggedin;
         let name = request.params.name;
-        let deckName = request.body.name;
+        let deckName = request.body.value;
         db.pokemons.edited(cookie, name, deckName, (error, result, user, name) => {
             // console.log(result)
             // response.render('viewdeck', {cards:result, deck:name, user:user});
@@ -114,16 +114,6 @@ module.exports = (db) => {
       });
     };
 
-    let star = (request, response) => {
-        let cookie = request.cookies.loggedin;
-        let name = request.params.name;
-        let value = request.body.name;
-        console.log(value)
-        db.pokemons.rating(response, cookie, name, value, (error, result, user, name) => {
-            console.log(result)
-            response.render('profile', {cards:result, deck:name, user:user});
-      });
-    };
   /**
    * ===========================================
    * Export controller functions as a module
@@ -144,8 +134,7 @@ module.exports = (db) => {
     viewDeck,
     editDeck,
     editedDeck,
-    deleteDeck,
-    star
+    deleteDeck
   };
 
 }
