@@ -87,6 +87,10 @@ strong{
 	margin: 5px;
 }
 
+.pokesmimg:hover{
+	transform: scale(1.3);
+}
+
 #exampleModalLabel{
 	font-size: 25px;
 }

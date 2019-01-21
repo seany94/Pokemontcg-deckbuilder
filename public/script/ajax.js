@@ -181,17 +181,25 @@ var ajaxOutput = function(input){
                 let modalBtnView = document.createElement("button");
                 modalBtnView.setAttribute("type", "submit");
                 modalBtnView.setAttribute("class", "btn btn-primary");
-                modalBtnView.setAttribute("id", "delete" + i);
+                modalBtnView.setAttribute("id", "delete");
                 modalBtnView.innerHTML = 'Delete';
                 modalFoot.appendChild(modalBtnView);
 
-                if(document.querySelector('#deck') != null){
-                    let deleteButton = document.querySelector('#delete' + i)
-
-                    deleteButton.addEventListener('click', function(){
-                        document.querySelector('#modal').removeChild(document.querySelector(`#pokeimg${input}`));
-                        document.querySelector('.inputhidden').removeChild(document.querySelector('#card'));
-                    });
+                if(document.querySelector('#newdeck') != null || document.querySelector('#deck') != null){
+                    if(document.querySelector('#cards').hasChildNodes()){
+                        let cards = document.querySelector('#cards').childNodes;
+                        for(let d = 0; d < cards.length; d++){
+                            // Delete pokemon from deck container
+                            var delButton = document.querySelector('#delete');
+                            delButton.addEventListener('click', function(){
+                                // document.querySelector('#modal').removeChild(document.querySelector('#pokesmimg'))
+                                document.querySelector('.inputhidden').removeChild(document.querySelector('#card'))
+                                console.log("HELP")
+                                // document.querySelector('#cards').removeChild(document.querySelector('#pokesmimg'))
+                                // document.querySelector('#cards').removeChild(document.querySelector('#pokeinput'))
+                            });
+                        }
+                    }
                 }
             });
             document.querySelector('#deck').appendChild(pokeLarge);
@@ -369,33 +377,37 @@ var ajax = function(input){
                     modalBtnView.innerHTML = 'Add';
                     modalFoot.appendChild(modalBtnView);
 
-                    // Add pokemon to deck container
+                    // Add pokemon card to deck container
                     if(document.querySelector('#newdeck') != null || document.querySelector('#deck') != null){
                         var addButton = document.querySelector('#add' + i)
-
                         addButton.addEventListener('click', function(){
                             let pokeAdd = document.createElement("img");
                             pokeAdd.setAttribute("class", "pokesmimg");
-                            pokeAdd.setAttribute("id", "pokeimgadd" + i);
+                            pokeAdd.setAttribute("id", "pokeimgadd");
                             pokeAdd.setAttribute("src", `${jsonData.cards[i].imageUrl}`);
                             document.querySelector('#cards').appendChild(pokeAdd);
 
                             let pokeInput = document.createElement("input");
                             pokeInput.setAttribute("type", "hidden");
                             pokeInput.setAttribute("class", "pokeval");
-                            pokeInput.setAttribute("id", "pokeinput" + i);
+                            pokeInput.setAttribute("id", "pokeinput");
                             pokeInput.setAttribute("name", "card");
                             pokeInput.setAttribute("value", `${jsonData.cards[i].id}`);
                             document.querySelector('#cards').appendChild(pokeInput);
 
-                            // Delete pokemon from deck container
-                            // if(document.querySelector('#cards').hasChildNodes()){
-                            //     var delButton = document.querySelector('#pokeimgadd' + i)
+                            // Remove pokemon card from deck container
+                            if(document.querySelector('#cards').hasChildNodes()){
+                                let cards = document.querySelector('#cards').childNodes;
 
-                            //     delButton.addEventListener('click', function(){
-                            //         document.querySelector('#cards').removeChild(document.querySelector('#pokeimgadd' + i))
-                            //     });
-                            // }
+                                for(let d = 0; d < cards.length; d++){
+                                    // Delete pokemon from deck container
+                                    var delButton = cards[d];
+                                    delButton.addEventListener('click', function(){
+                                        document.querySelector('#cards').removeChild(document.querySelector('#pokeimgadd'))
+                                        document.querySelector('#cards').removeChild(document.querySelector('#pokeinput'))
+                                    });
+                                }
+                            }
                         });
                     }
                 });
@@ -411,7 +423,6 @@ var ajax = function(input){
                     document.body.removeChild(document.querySelector(".modal"));
                 }
                 }
-
             };
 
             // make a new request
@@ -430,5 +441,6 @@ var ajax = function(input){
         }
         else if(document.querySelector("section").hasChildNodes()){
             document.querySelector(".gallery").removeChild(document.querySelector(".gallery").lastChild);
+            document.querySelector(".gallery").removeChild(document.querySelector("#search"));
         }
 };

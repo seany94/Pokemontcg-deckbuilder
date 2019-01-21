@@ -38,6 +38,8 @@ Further: Allow users to click on card image and a pop up modal will show the car
 
 Further: List of decks users created can be sorted by date created/edited/name/deck_id/rating
 
+Further: Search filter function for cards
+
 Further: User that are log in are able to access deck tab to see other users’ created decks and they can add comment/review and rate them
 
 Further: Allows user to see similar type of deck with same typing as theirs as recommended
