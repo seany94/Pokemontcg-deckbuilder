@@ -1,5 +1,5 @@
 # Pokemontcg-deckbuilder
-Using node.js, react.js, express, postgres and bootstrap
+Using node.js, react.js, express, postgres, DOM, AJAX and bootstrap
 
 Requirements:-
 1. Display database of Pokemon cards. All users can view them
@@ -32,6 +32,8 @@ Further: Allow user to see their own profile tab when sign in
 
 Further: Allow user to view deck they or other users created in respective profile or under user tab
 
+Further: Restrict signed in user to edit and delete only their own deck. Redirect them to their own profile when signed in user attempt to edit or delete other users deck
+
 Further: Validate user login to avoid re-sign in
 
 Further: Allow users to click on card image and a pop up modal will show the card’s details with high resolution image
@@ -39,6 +41,8 @@ Further: Allow users to click on card image and a pop up modal will show the car
 Further: Search filter function for cards
 
 Further: List of decks users created can be sorted by date created/edited/name/deck_id/rating
+
+------Done till here------
 
 Further: User that are log in are able to access deck tab to see other users’ created decks and they can add comment/review and rate them
 

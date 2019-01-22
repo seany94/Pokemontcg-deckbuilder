@@ -14,6 +14,11 @@ for(let i = 0; i < label.length; i++){
     });
 }
 
+// $('label').click(function() {
+//     $('label').removeClass('active');
+//     $(this).addClass('active');
+// });
+
     if(document.querySelector('#pokecard') != null && document.querySelector('#traincard') != null && document.querySelector('#energycard') != null){
         var pokeButton = document.querySelector('#pokecard')
 
