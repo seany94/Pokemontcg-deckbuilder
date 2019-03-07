@@ -9,6 +9,11 @@ body{
 	font-size: 18px;
 }
 
+.fab{
+	font-size: 18px;
+	color: rgb(62, 205, 217);
+}
+
 #form{
 	display: inline;
 	padding: 0 15px 0 0;

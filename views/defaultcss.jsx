@@ -8,6 +8,7 @@ class Defaultcss extends React.Component {
         <head>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossOrigin="anonymous" />
         <link rel="stylesheet" type="text/css" href="/css/style.css" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css?family=Bitter" rel="stylesheet" />
         <title>Pokemon Trading Card Game Deck-Builder</title>
         </head>
@@ -52,8 +53,10 @@ class Defaultcss extends React.Component {
         <footer className="sticky-bottom">
             Copyright 2019 <span> </span>
             Created with &hearts; by <span>Sean Chan</span><span> </span>
-            Github: @
-            <a href="https://github.com/seany94" target="_blank"><img src="https://img.icons8.com/ios-glyphs/25/000000/github.png" />
+            <i class="fas fa-at"></i>
+            <a href="https://github.com/seany94" target="_blank"><i class="fab fa-github-square"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/seancwl" target="_blank"><i className="fab fa-linkedin"></i>
             </a>
         </footer>
         <script src="/script/ajax.js"></script>
