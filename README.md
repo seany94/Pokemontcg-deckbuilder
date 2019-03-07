@@ -1,6 +1,10 @@
 # Pokemontcg-deckbuilder
 Using node.js, react.js, express, postgres, DOM, AJAX and bootstrap
 
+Heroku Link:- https://pokemondeckbuilder.herokuapp.com/
+Login using my account if you do not want to signup:- Username: seanc, Password: sc123
+(Pending fix for remove card)
+
 Requirements:-
 1. Display database of Pokemon cards. All users can view them
 2. Allow users to sort cards typing ex: Pokemon/trainer/energy
