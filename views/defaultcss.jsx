@@ -53,10 +53,12 @@ class Defaultcss extends React.Component {
         <footer className="sticky-bottom">
             Copyright 2019 <span> </span>
             Created with &hearts; by <span>Sean Chan</span><span> </span>
-            <i class="fas fa-at"></i>
+            <i className="fas fa-at"></i>
             <a href="https://github.com/seany94" target="_blank"><i class="fab fa-github-square"></i>
             </a>
             <a href="https://www.linkedin.com/in/seancwl" target="_blank"><i className="fab fa-linkedin"></i>
+            </a>
+            <a href="https://seany94.github.io/" target="_blank"><i className="fab fa-chrome"></i>
             </a>
         </footer>
         <script src="/script/ajax.js"></script>
