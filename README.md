@@ -2,7 +2,7 @@
 Heroku Link:- https://pokemondeckbuilder.herokuapp.com/
 Login using my account if you do not want to signup:- Username: seanc, Password: sc123
 
-Using node.js, react.js, express, postgres, DOM, AJAX and bootstrap
+Using react.js, node.js, express, postgres, javascript, JQuery, DOM, AJAX and bootstrap
 
 (Pending fix for remove card bug)
 
