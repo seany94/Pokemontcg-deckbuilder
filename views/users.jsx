@@ -4,7 +4,7 @@ var Defaultcss = require('./defaultcss');
 class Details extends React.Component{
     render(){
         return(
-            <div>
+            <div className="users">
             <div className="modal fade" id={"exampleModal" + this.props.list.id} tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div className="modal-dialog" role="document">
                 <div className="modal-content">
@@ -26,9 +26,11 @@ class Details extends React.Component{
                 </div>
               </div>
             </div>
-                <ul>{this.props.list.name} from {this.props.list.nationality}</ul>
-                <ul><img src={this.props.list.photo_url} alt="broken link" height="270" width="270" /></ul>
-                <input type="submit" value="View Details" data-toggle="modal" data-target={"#exampleModal" + this.props.list.id}/>
+                <ul>
+                    <li/>{this.props.list.name} from {this.props.list.nationality}
+                    <li/><img src={this.props.list.photo_url} height="270" width="270" />
+                    <li/><input type="submit" value="View Details" data-toggle="modal" data-target={"#exampleModal" + this.props.list.id}/>
+                </ul>
             </div>
             );
     }
@@ -42,9 +44,14 @@ class Users extends React.Component {
     return (
         <Defaultcss>
             <h3>Below is the is the whole list of users registered on our website</h3>
-            <form method="GET" action="/">
-                <input type="submit" className="new" value="Back" />
-            </form>
+            <div className="usersbtn">
+                <form method="GET" action="/">
+                    <input type="submit" className="new" value="Back" />
+                </form>
+                <form method="GET" action="/user/deck">
+                    <input type="submit" value="Create Deck"/>
+                </form>
+            </div>
             {users}
         </Defaultcss>
     );

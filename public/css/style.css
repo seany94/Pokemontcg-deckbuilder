@@ -1,12 +1,35 @@
 body{
-	background-image: url("https://stmed.net/sites/default/files/pokemon-go-hd-wallpapers-33512-9070371.png");
+	background-image: url("/images/bg.png");
 	background-size: cover;
 	background-repeat: no-repeat;
-	min-height: 900px;
 	font-family: 'Bitter', serif;
 	color: rgb(62, 205, 217);
 	text-shadow: 0 1px black;
 	font-size: 18px;
+}
+
+ul{
+	display: inline-block;
+}
+
+li{
+	list-style-type: none;
+}
+
+.users{
+	display: inline;
+}
+
+.usersbtn form{
+	display: inline;
+}
+
+ul img{
+	background-image: url('/images/alt.png');
+}
+
+.profilebtn form{
+	display: inline;
 }
 
 .fab{
@@ -111,6 +134,7 @@ strong{
 }
 
 .pokesmimg{
+	background-image: url('/images/alt2.png');
 	max-width: 128px;
 	margin: 5px;
 }
@@ -170,6 +194,7 @@ footer{
 		left: 20%;
 	}
 	#content img{
-		max-width: 230px;
+		max-width: 370px;
+		margin: 0 50px;
 	}
 }
