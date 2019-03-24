@@ -23,22 +23,22 @@ for(let i = 0; i < label.length; i++){
         var pokeButton = document.querySelector('#pokecard')
 
         pokeButton.addEventListener('click', function(){
-            var input = 'supertype=pokemon'
-            ajax(input);
+            const supertype = "pokemon";
+            sets(supertype)
         });
 
         var trainButton = document.querySelector('#traincard')
 
         trainButton.addEventListener('click', function(){
-            var input = 'supertype=trainer'
-            ajax(input);
+            const supertype = "trainer";
+            sets(supertype)
         });
 
         var energyButton = document.querySelector('#energycard')
 
         energyButton.addEventListener('click', function(){
-            var input = 'supertype=energy'
-            ajax(input);
+            const supertype = "energy";
+            sets(supertype)
         });
     }
     if(document.querySelector('#deck') != null){
@@ -56,6 +56,43 @@ for(let i = 0; i < label.length; i++){
         }
     }
 };
+
+var sets = function(supertype){
+    fetch("https://api.pokemontcg.io/v1/sets")
+    .then(function(response) {
+      return response.json()
+    })
+    .then(function(json) {
+      var pokeSets = json.sets;
+      var pokeSel = document.createElement("select");
+      pokeSel.setAttribute("class", "form-control");
+      pokeSel.setAttribute("id", "pokesets");
+      pokeSel.setAttribute("name", supertype);
+      pokeSel.setAttribute('onchange', 'optChange()');
+      document.querySelector('.gallery').appendChild(pokeSel);
+      var optHolder = document.createElement("option");
+      optHolder.innerHTML = "Choose from over 100 card sets"
+      document.querySelector('select').appendChild(optHolder);
+      for(let i = 0; i < pokeSets.length; i++){
+        var pokeOpt = document.createElement("option");
+        pokeOpt.value = `${pokeSets[i].code}`;
+        pokeOpt.innerHTML = `${pokeSets[i].name}`
+        document.querySelector('select').appendChild(pokeOpt);
+      }
+    })
+    .then(function() {
+      var pokeChoice = document.getElementById("pokesets");
+      var setChoice = pokeChoice.options[pokeChoice.selectedIndex].value;
+    })
+}
+
+var optChange = function(){
+    var supertype = document.querySelector('select').name;
+    var pokeChoice = document.getElementById("pokesets");
+    var setChoice = pokeChoice.options[pokeChoice.selectedIndex].value;
+    var input = `supertype=${supertype}&setCode=${setChoice}`;
+    ajax(input);
+}
 
 var search = function() {
   const pokemon = Array.from(document.querySelectorAll('.modals'));
@@ -469,5 +506,6 @@ var ajax = function(input){
         else if(document.querySelector("section").hasChildNodes()){
             document.querySelector(".gallery").removeChild(document.querySelector(".gallery").lastChild);
             document.querySelector(".gallery").removeChild(document.querySelector("#search"));
+            document.querySelector(".gallery").removeChild(document.querySelector("#pokesets"));
         }
 };
