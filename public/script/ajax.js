@@ -20,25 +20,65 @@ for(let i = 0; i < label.length; i++){
 // });
 
     if(document.querySelector('#pokecard') != null && document.querySelector('#traincard') != null && document.querySelector('#energycard') != null){
-        var pokeButton = document.querySelector('#pokecard')
+
+        var pokeButton = document.querySelector('#pokecard');
 
         pokeButton.addEventListener('click', function(){
-            const supertype = "pokemon";
-            sets(supertype)
+            if(document.querySelector('.cardcontainer') != null){
+                document.querySelector(".gallery").removeChild(document.querySelector(".gallery").lastChild);
+                var cardContainer = document.createElement("div");
+                cardContainer.setAttribute("class", "cardcontainer");
+                document.body.querySelector(".gallery").appendChild(cardContainer);
+                const supertype = "pokemon";
+                sets(supertype);
+            }
+            else{
+                var cardContainer = document.createElement("div");
+                cardContainer.setAttribute("class", "cardcontainer");
+                document.body.querySelector(".gallery").appendChild(cardContainer);
+                const supertype = "pokemon";
+                sets(supertype);
+            }
         });
 
-        var trainButton = document.querySelector('#traincard')
+        var trainButton = document.querySelector('#traincard');
 
         trainButton.addEventListener('click', function(){
-            const supertype = "trainer";
-            sets(supertype)
+            if(document.querySelector('.cardcontainer') != null){
+                document.querySelector(".gallery").removeChild(document.querySelector(".gallery").lastChild);
+                var cardContainer = document.createElement("div");
+                cardContainer.setAttribute("class", "cardcontainer");
+                document.body.querySelector(".gallery").appendChild(cardContainer);
+                const supertype = "trainer";
+                sets(supertype);
+            }
+            else{
+                var cardContainer = document.createElement("div");
+                cardContainer.setAttribute("class", "cardcontainer");
+                document.body.querySelector(".gallery").appendChild(cardContainer);
+                const supertype = "trainer";
+                sets(supertype);
+            }
         });
 
-        var energyButton = document.querySelector('#energycard')
+        var energyButton = document.querySelector('#energycard');
 
         energyButton.addEventListener('click', function(){
-            const supertype = "energy";
-            sets(supertype)
+            if(document.querySelector('.cardcontainer') != null){
+                document.querySelector(".gallery").removeChild(document.querySelector(".gallery").lastChild);
+                var cardContainer = document.createElement("div");
+                cardContainer.setAttribute("class", "cardcontainer");
+                document.body.querySelector(".gallery").appendChild(cardContainer);
+                const supertype = "energy";
+                sets(supertype);
+            }
+            else{
+                var cardContainer = document.createElement("div");
+                cardContainer.setAttribute("class", "cardcontainer");
+                document.body.querySelector(".gallery").appendChild(cardContainer);
+                const supertype = "energy";
+                sets(supertype);
+            }
         });
     }
     if(document.querySelector('#deck') != null){
@@ -69,10 +109,14 @@ var sets = function(supertype){
       pokeSel.setAttribute("id", "pokesets");
       pokeSel.setAttribute("name", supertype);
       pokeSel.setAttribute('onchange', 'optChange()');
-      document.querySelector('.gallery').appendChild(pokeSel);
+      document.querySelector('.cardcontainer').appendChild(pokeSel);
       var optHolder = document.createElement("option");
       optHolder.innerHTML = "Choose from over 100 card sets"
       document.querySelector('select').appendChild(optHolder);
+      var optAll = document.createElement("option");
+      optAll.innerHTML = "All"
+      optAll.value = "all"
+      document.querySelector('select').appendChild(optAll);
       for(let i = 0; i < pokeSets.length; i++){
         var pokeOpt = document.createElement("option");
         pokeOpt.value = `${pokeSets[i].code}`;
@@ -87,11 +131,34 @@ var sets = function(supertype){
 }
 
 var optChange = function(){
-    var supertype = document.querySelector('select').name;
-    var pokeChoice = document.getElementById("pokesets");
-    var setChoice = pokeChoice.options[pokeChoice.selectedIndex].value;
-    var input = `supertype=${supertype}&setCode=${setChoice}`;
-    ajax(input);
+    if(document.querySelector('section') != null){
+        document.querySelector(".cardcontainer").removeChild(document.querySelector("#pokemons"));
+        document.querySelector(".cardcontainer").removeChild(document.querySelector("#search"));
+        var supertype = document.querySelector('select').name;
+        var pokeChoice = document.getElementById("pokesets");
+        var setChoice = pokeChoice.options[pokeChoice.selectedIndex].value;
+        if(setChoice == "all"){
+            var input = `supertype=${supertype}`;
+            ajax(input);
+        }
+        else{
+            var input = `supertype=${supertype}&setCode=${setChoice}`;
+            ajax(input);
+        }
+    }
+    else{
+        var supertype = document.querySelector('select').name;
+        var pokeChoice = document.getElementById("pokesets");
+        var setChoice = pokeChoice.options[pokeChoice.selectedIndex].value;
+        if(setChoice == "all"){
+            var input = `supertype=${supertype}`;
+            ajax(input);
+        }
+        else{
+            var input = `supertype=${supertype}&setCode=${setChoice}`;
+            ajax(input);
+        }
+    }
 }
 
 var search = function() {
@@ -304,11 +371,11 @@ var ajax = function(input){
         pokeSearch.setAttribute('class', 'form-control');
         pokeSearch.setAttribute('onkeyup', 'search()');
         pokeSearch.setAttribute('placeholder', 'Search');
-        document.querySelector('.gallery').appendChild(pokeSearch)
+        document.querySelector('.cardcontainer').appendChild(pokeSearch)
 
         var pokemons = document.createElement("section");
         pokemons.setAttribute("id", "pokemons");
-        document.querySelector('.gallery').appendChild(pokemons);
+        document.querySelector('.cardcontainer').appendChild(pokemons);
 
         // what to do when we recieve the request
         var responseHandler = function() {
