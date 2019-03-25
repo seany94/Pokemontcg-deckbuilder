@@ -122,6 +122,12 @@ var sets = function(supertype){
         pokeOpt.value = `${pokeSets[i].code}`;
         pokeOpt.innerHTML = `${pokeSets[i].name}`
         document.querySelector('select').appendChild(pokeOpt);
+        var pokeFormat = document.createElement("span");
+        pokeFormat.setAttribute("class", "badge badge-primary");
+        pokeFormat.setAttribute("id", `${pokeSets[i].code}`);
+        pokeFormat.innerHTML = `Standarded Format Legal: ${pokeSets[i].standardLegal} Expanded Format Legal: ${pokeSets[i].expandedLegal}`;
+        pokeFormat.style.display = "none";
+        document.querySelector('.cardcontainer').appendChild(pokeFormat);
       }
     })
     .then(function() {
@@ -137,12 +143,17 @@ var optChange = function(){
         var supertype = document.querySelector('select').name;
         var pokeChoice = document.getElementById("pokesets");
         var setChoice = pokeChoice.options[pokeChoice.selectedIndex].value;
+        var pokeBadge = document.querySelectorAll(".badge");
+        for(let i = 0; i < pokeBadge.length; i++){
+            pokeBadge[i].style.display = "none";
+        }
         if(setChoice == "all"){
             var input = `supertype=${supertype}`;
             ajax(input);
         }
         else{
             var input = `supertype=${supertype}&setCode=${setChoice}`;
+            document.querySelector(`#${setChoice}`).style.display = "";
             ajax(input);
         }
     }
@@ -150,12 +161,14 @@ var optChange = function(){
         var supertype = document.querySelector('select').name;
         var pokeChoice = document.getElementById("pokesets");
         var setChoice = pokeChoice.options[pokeChoice.selectedIndex].value;
+        // document.querySelector(".badge").style.display = "none";
         if(setChoice == "all"){
             var input = `supertype=${supertype}`;
             ajax(input);
         }
         else{
             var input = `supertype=${supertype}&setCode=${setChoice}`;
+            document.querySelector(`#${setChoice}`).style.display = "";
             ajax(input);
         }
     }
