@@ -49,6 +49,8 @@ Further: List of decks users created can be sorted by date created/edited/name/d
 
 Further: Allow user to choose cards from over 100 different sets released up till now. Wider range of options for user in terms of the range of cards they can pick
 
+Further: Display Pokemon card sets format whether is currently standard or expanded legal for tournament
+
 ------Done till here------
 
 Further: User that are log in are able to access deck tab to see other users’ created decks and they can add comment/review and rate them
